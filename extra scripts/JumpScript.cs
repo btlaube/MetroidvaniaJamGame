@@ -41,9 +41,6 @@ public class JumpScript : MonoBehaviour
         if(transform.position.y - startHeight >= maxHeight) {
             releasedJump = true;
         }
-        //if(wallContact != 0) {
-        //    rb.gravityScale = wallCling;
-        //}
     }
 
     void FixedUpdate() {
@@ -62,14 +59,6 @@ public class JumpScript : MonoBehaviour
         if(releasedJump) {
             StopJump();
         }
-        /*
-        if(falling) {
-            StartFall();
-        }
-        else {
-            StopFall();
-        }
-        */
     }
 
     void StartFloorJump() {
@@ -102,13 +91,13 @@ public class JumpScript : MonoBehaviour
         falling = false;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnCollisionEnter2D(Collision other)
     {
         if(other.gameObject.tag == "Floor") {
             grounded = true;
         }
         else if(other.gameObject.tag == "Wall") {
-            if(other.GetComponent<EdgeCollider2D>().points[0].x < this.transform.position.x) {
+            if(other.GameObject.GetComponent<EdgeCollider2D>().points[0].x < this.transform.position.x) {
                 wallContact = -1;
             }
             else {
@@ -117,7 +106,7 @@ public class JumpScript : MonoBehaviour
         }
         
     }
-    void OnTriggerExit2D(Collider2D other)
+    void OnCollisionExit2D(Collision other)
     {
         if(other.gameObject.tag == "Floor") {
             grounded = false;
