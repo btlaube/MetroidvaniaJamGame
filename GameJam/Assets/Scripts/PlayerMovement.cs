@@ -135,19 +135,16 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
+        rigidBody.velocity = new Vector2(0, 0);
         if(other.gameObject.tag == "Floor") {
             grounded = true;
         }
         else if(other.gameObject.tag == "Wall") {
-            rigidBody.velocity = new Vector2(0, 0);
             if(other.gameObject.transform.position.x < this.transform.position.x) {
                 wallContact = -1;
             }
             else if(other.gameObject.transform.position.x > this.transform.position.x){
                 wallContact = 1;
-            }
-            else if(other.gameObject.transform.position.y < this.transform.position.y) {
-                grounded = true;
             }
         }
         
