@@ -14,10 +14,10 @@ public class PlayerMovement : MonoBehaviour
     private float jumpForce;
     [SerializeField]
     private float jumpTimer = 0.5f;
-    [SerializeField]
-    private bool grounded = false;
-    [SerializeField]
-    private int wallContact;
+    //[SerializeField]
+    //private bool grounded = false;
+    //[SerializeField]
+    //private int wallContact;
 
     [SerializeField]
     private bool jumping = false;
@@ -28,12 +28,45 @@ public class PlayerMovement : MonoBehaviour
     private float timer;
     private float moveVelocity;
 
+    //public bool isJumping;
+    //public float jumpSpeed = 8f;
+    private float rayCastLengthCheck = 0.1f;
+    private float width;
+    private float height;
+
     void Awake() {
         rigidBody = GetComponent<Rigidbody2D>();
         timer = jumpTimer;
+        width = GetComponent<Collider2D>().bounds.extents.x + 0.001f;
+        height = GetComponent<Collider2D>().bounds.extents.y + 0.001f;
     }
 
     void Update() {
+
+        /*
+        RaycastHit2D up = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.up), 1f, 6);
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector2.up) * 1f, Color.red);
+        RaycastHit2D down = Physics2D.Raycast(transform.position, transform.TransformDirection(-Vector2.up), 1f, 6);
+        Debug.DrawRay(transform.position, transform.TransformDirection(-Vector2.up) * 1f, Color.red);
+        RaycastHit2D right = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.right), 1f, 6);
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector2.right) * 1f, Color.red);
+        RaycastHit2D left = Physics2D.Raycast(transform.position, transform.TransformDirection(-Vector2.right), 1f, 6);
+        Debug.DrawRay(transform.position, transform.TransformDirection(-Vector2.right) * 1f, Color.red);
+
+        if(up) {
+            Debug.Log(up.collider);
+        }
+        if(down) {
+            Debug.Log(down.collider);
+        }
+        if(right) {
+            Debug.Log(right.collider);
+        }
+        if(left) {
+            Debug.Log(left.collider);
+        }
+        */
+
         if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) {
             pressedJump = true;
         }
@@ -50,14 +83,14 @@ public class PlayerMovement : MonoBehaviour
 
         moveVelocity = 0;
         //Left Right Movement
-        if(wallContact != -1) {
+        if(GetWallDirection() != -1) {
             if (Input.GetKey (KeyCode.LeftArrow) || Input.GetKey (KeyCode.A)) 
             {
                 moveVelocity = -speed;
                 GetComponent<Rigidbody2D> ().velocity = new Vector2 (moveVelocity, GetComponent<Rigidbody2D> ().velocity.y);
             }
         }
-        if(wallContact != 1) {
+        if(GetWallDirection() != 1) {
             if (Input.GetKey (KeyCode.RightArrow) || Input.GetKey (KeyCode.D)) 
             {
                 moveVelocity = speed;
@@ -75,33 +108,36 @@ public class PlayerMovement : MonoBehaviour
                 GetComponent<Rigidbody2D> ().velocity = new Vector2 (moveVelocity, GetComponent<Rigidbody2D> ().velocity.y);
             }
         }
-        
-        
     }
 
     void FixedUpdate() {
         if(pressedJump) {
-            if(grounded) {
+            if(PlayerIsOnGround()) {
                 StartFloorJump();
             }
+            else if(IsWallToLeftOrRight()) {
+                StartWallJump(-GetWallDirection());
+            }
+            /*
             if(wallContact == -1) {
                 StartWallJump(1);
             }
             else if(wallContact == 1) {
                 StartWallJump(-1);
             }
+            */
             
         }
         if(releasedJump) {
             StopJump();
         }
         if(!jumping) {
-            if(wallContact == 0) {                
-                rigidBody.gravityScale = gravityScale;
-            }
-            else {
+            if(IsWallToLeftOrRight()) {                
                 rigidBody.velocity = new Vector2(rigidBody.velocity.x, rigidBody.velocity.y);
                 rigidBody.gravityScale = wallClingGravity;
+            }
+            else {
+                rigidBody.gravityScale = gravityScale;
             }
         }
         
@@ -133,29 +169,71 @@ public class PlayerMovement : MonoBehaviour
         startTimer = false;
     }
 
+    
     void OnCollisionEnter2D(Collision2D other)
     {
+        
+        //Debug.Log(other.gameObject.transform.position);
+        
         rigidBody.velocity = new Vector2(0, 0);
-        if(other.gameObject.tag == "Floor") {
-            grounded = true;
-        }
-        else if(other.gameObject.tag == "Wall") {
-            if(other.gameObject.transform.position.x < this.transform.position.x) {
-                wallContact = -1;
-            }
-            else if(other.gameObject.transform.position.x > this.transform.position.x){
-                wallContact = 1;
-            }
-        }
+        
         
     }
-    void OnCollisionExit2D(Collision2D other)
-    {
-        if(other.gameObject.tag == "Floor") {
-            grounded = false;
+    public bool PlayerIsOnGround() {
+        // 1
+        bool groundCheck1 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - height), -Vector2.up, rayCastLengthCheck);
+        Debug.DrawRay(new Vector2(transform.position.x, transform.position.y - height), transform.TransformDirection(-Vector2.up) * rayCastLengthCheck, Color.red);
+
+        bool groundCheck2 = Physics2D.Raycast(new Vector2(transform.position.x + (width - 0.2f), transform.position.y - height), -Vector2.up, rayCastLengthCheck);
+        Debug.DrawRay(new Vector2(transform.position.x + (width - 0.2f), transform.position.y - height), -Vector2.up * rayCastLengthCheck, Color.red);
+
+        bool groundCheck3 = Physics2D.Raycast(new Vector2( transform.position.x - (width - 0.2f), transform.position.y - height), -Vector2.up, rayCastLengthCheck);
+        Debug.DrawRay(new Vector2( transform.position.x - (width - 0.2f), transform.position.y - height), -Vector2.up * rayCastLengthCheck, Color.red);
+
+        // 2
+        if (groundCheck1 || groundCheck2 || groundCheck3) {
+            return true;
         }
-        else if(other.gameObject.tag == "Wall") {
-            wallContact = 0;
+        else {
+            return false;
+        }
+    }
+
+    public bool IsWallToLeftOrRight() {
+        // 1
+        bool wallOnleft = Physics2D.Raycast(new Vector2(transform.position.x - width, transform.position.y), -Vector2.right, rayCastLengthCheck);
+        Debug.DrawRay(new Vector2(transform.position.x - width, transform.position.y), -Vector2.right * rayCastLengthCheck, Color.red);
+        bool wallOnRight = Physics2D.Raycast(new Vector2(transform.position.x + width, transform.position.y), Vector2.right, rayCastLengthCheck);
+        Debug.DrawRay(new Vector2(transform.position.x + width, transform.position.y), Vector2.right * rayCastLengthCheck, Color.red);
+        // 2
+        if (wallOnleft || wallOnRight) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public bool PlayerIsTouchingGroundOrWall() {
+        if (PlayerIsOnGround() || IsWallToLeftOrRight()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public int GetWallDirection() {
+        bool isWallLeft = Physics2D.Raycast(new Vector2(transform.position.x - width, transform.position.y), -Vector2.right, rayCastLengthCheck);
+        bool isWallRight = Physics2D.Raycast(new Vector2(transform.position.x + width, transform.position.y), Vector2.right, rayCastLengthCheck);
+        if (isWallLeft) {
+            return -1;
+        }
+        else if (isWallRight) {
+            return 1;
+        }
+        else {
+            return 0;
         }
     }
 
