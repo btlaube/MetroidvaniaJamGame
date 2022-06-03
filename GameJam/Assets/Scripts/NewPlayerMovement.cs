@@ -37,10 +37,10 @@ public class NewPlayerMovement : MonoBehaviour
         input.x = Input.GetAxis("Horizontal");
         input.y = Input.GetAxis("Jump");
         // 2
-        if (input.x > 0f) {
+        if (rb.velocity.x > 1f) {
             sr.flipX = false;
         }
-        else if (input.x < 0f) {
+        else if (rb.velocity.x < -1f) {
             sr.flipX = true;
         }
 
@@ -58,7 +58,13 @@ public class NewPlayerMovement : MonoBehaviour
             }
         }
 
-        if (jumpDuration > jumpDurationThreshold) input.y = 0f;
+        if (PlayerIsOnWall() && isJumping == false) {
+            if (input.y > 0f) {
+                isJumping = true;
+            }
+        }
+
+        //if (jumpDuration > jumpDurationThreshold) input.y = 0f;
 
         if(PlayerIsOnWall() && !PlayerIsOnGround()) {
             rb.gravityScale = 0.1f;
@@ -104,11 +110,13 @@ public class NewPlayerMovement : MonoBehaviour
         if(GetWallDirection() == -1) {
             if(input.x != -1) {
                 rb.AddForce(new Vector2(((input.x * speed) - rb.velocity.x) * acceleration, 0));
+                jumpDuration = 0f;
             }
         }
         else if(GetWallDirection() == 1) {
             if(input.x != 1) {
                 rb.AddForce(new Vector2(((input.x * speed) - rb.velocity.x) * acceleration, 0));
+                jumpDuration = 0f;
             }
         }
         else {
@@ -118,10 +126,9 @@ public class NewPlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(xVelocity, yVelocity);
 
         if(PlayerIsOnWall() && !PlayerIsOnGround() && input.y == 1) {
-            rb.velocity = new Vector2(-GetWallDirection() * speed * 0.75f, rb.velocity.y);
-            
+            rb.velocity = new Vector2(-GetWallDirection() * speed * 0.75f, rb.velocity.y);            
         }
-        
+
         if (isJumping && jumpDuration < jumpDurationThreshold) {
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         }
@@ -152,6 +159,7 @@ public class NewPlayerMovement : MonoBehaviour
         bool wallOnRight = Physics2D.Raycast(new Vector2(transform.position.x + width, transform.position.y), Vector2.right, rayCastLengthCheck);
         // 2
         if (wallOnleft || wallOnRight) {
+            //rb.velocity = new Vector2(0f, 0f);
             return true;
         }
         else {
@@ -196,6 +204,13 @@ public class NewPlayerMovement : MonoBehaviour
         else {
             return 0;
         }
+    }
+
+    void OnCollisionEnter2D(Collision2D other) {
+        if(PlayerIsOnWall()) {
+            rb.velocity = new Vector2(0f, 0f);
+        }
+        
     }
 
 }
