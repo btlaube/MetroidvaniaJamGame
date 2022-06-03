@@ -59,6 +59,19 @@ public class NewPlayerMovement : MonoBehaviour
         }
 
         if (jumpDuration > jumpDurationThreshold) input.y = 0f;
+
+        if(PlayerIsOnWall() && !PlayerIsOnGround()) {
+            rb.gravityScale = 0.1f;
+            if (GetWallDirection() == -1) {
+                sr.flipX = false;
+            }
+            else if (GetWallDirection() == 1) {
+                sr.flipX = true;
+            }
+        }
+        else {
+            rb.gravityScale = 1f;
+        }
     }
 
     void FixedUpdate() {
@@ -88,14 +101,27 @@ public class NewPlayerMovement : MonoBehaviour
         }
 
         // 3
-        rb.AddForce(new Vector2(((input.x * speed) - rb.velocity.x) * acceleration, 0));
+        if(GetWallDirection() == -1) {
+            if(input.x != -1) {
+                rb.AddForce(new Vector2(((input.x * speed) - rb.velocity.x) * acceleration, 0));
+            }
+        }
+        else if(GetWallDirection() == 1) {
+            if(input.x != 1) {
+                rb.AddForce(new Vector2(((input.x * speed) - rb.velocity.x) * acceleration, 0));
+            }
+        }
+        else {
+            rb.AddForce(new Vector2(((input.x * speed) - rb.velocity.x) * acceleration, 0));
+        }
         // 4
         rb.velocity = new Vector2(xVelocity, yVelocity);
 
-        if (IsWallToLeftOrRight() && !PlayerIsOnGround() && input.y == 1) {
+        if(PlayerIsOnWall() && !PlayerIsOnGround() && input.y == 1) {
             rb.velocity = new Vector2(-GetWallDirection() * speed * 0.75f, rb.velocity.y);
+            
         }
-
+        
         if (isJumping && jumpDuration < jumpDurationThreshold) {
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         }
@@ -107,10 +133,10 @@ public class NewPlayerMovement : MonoBehaviour
         Debug.DrawRay(new Vector2(transform.position.x, transform.position.y - height), transform.TransformDirection(-Vector2.up) * rayCastLengthCheck, Color.red);
 
         bool groundCheck2 = Physics2D.Raycast(new Vector2(transform.position.x + (width - 0.2f), transform.position.y - height), -Vector2.up, rayCastLengthCheck);
-        Debug.DrawRay(new Vector2(transform.position.x + (width - 0.2f), transform.position.y - height), -Vector2.up * rayCastLengthCheck, Color.red);
+        Debug.DrawRay(new Vector2(transform.position.x + (width - 0.2f), transform.position.y - height), -Vector2.up * rayCastLengthCheck, Color.blue);
 
         bool groundCheck3 = Physics2D.Raycast(new Vector2( transform.position.x - (width - 0.2f), transform.position.y - height), -Vector2.up, rayCastLengthCheck);
-        Debug.DrawRay(new Vector2( transform.position.x - (width - 0.2f), transform.position.y - height), -Vector2.up * rayCastLengthCheck, Color.red);
+        Debug.DrawRay(new Vector2( transform.position.x - (width - 0.2f), transform.position.y - height), -Vector2.up * rayCastLengthCheck, Color.green);
         // 2
         if (groundCheck1 || groundCheck2 || groundCheck3) {
             return true;
@@ -120,7 +146,7 @@ public class NewPlayerMovement : MonoBehaviour
         }
     }
 
-    public bool IsWallToLeftOrRight() {
+    public bool PlayerIsOnWall() {
         // 1
         bool wallOnleft = Physics2D.Raycast(new Vector2(transform.position.x - width, transform.position.y), -Vector2.right, rayCastLengthCheck);
         bool wallOnRight = Physics2D.Raycast(new Vector2(transform.position.x + width, transform.position.y), Vector2.right, rayCastLengthCheck);
@@ -134,7 +160,7 @@ public class NewPlayerMovement : MonoBehaviour
     }
 
     public bool PlayerIsTouchingGroundOrWall() {
-        if (PlayerIsOnGround() || IsWallToLeftOrRight()) {
+        if (PlayerIsOnGround() || PlayerIsOnWall()) {
             return true;
         }
         else {
@@ -143,12 +169,28 @@ public class NewPlayerMovement : MonoBehaviour
     }
 
     public int GetWallDirection() {
-        bool isWallLeft = Physics2D.Raycast(new Vector2(transform.position.x - width, transform.position.y), -Vector2.right, rayCastLengthCheck);
-        bool isWallRight = Physics2D.Raycast(new Vector2(transform.position.x + width, transform.position.y), Vector2.right, rayCastLengthCheck);
-        if (isWallLeft) {
+        bool isWallLeft1 = Physics2D.Raycast(new Vector2(transform.position.x - width, transform.position.y), -Vector2.right, rayCastLengthCheck);
+        Debug.DrawRay(new Vector2(transform.position.x - width, transform.position.y), -Vector2.right * rayCastLengthCheck, Color.red);
+
+        bool isWallLeft2 = Physics2D.Raycast(new Vector2(transform.position.x - width, transform.position.y), -Vector2.right, rayCastLengthCheck);
+        Debug.DrawRay(new Vector2(transform.position.x - width, transform.position.y + (height - 0.2f)), -Vector2.right * rayCastLengthCheck, Color.green);
+
+        bool isWallLeft3 = Physics2D.Raycast(new Vector2(transform.position.x - width, transform.position.y), -Vector2.right, rayCastLengthCheck);
+        Debug.DrawRay(new Vector2(transform.position.x - width, transform.position.y - (height - 0.2f)), -Vector2.right * rayCastLengthCheck, Color.blue);
+
+        bool isWallRight1 = Physics2D.Raycast(new Vector2(transform.position.x + width, transform.position.y), Vector2.right, rayCastLengthCheck);
+        Debug.DrawRay(new Vector2(transform.position.x + width, transform.position.y), Vector2.right * rayCastLengthCheck, Color.red);
+
+        bool isWallRight2 = Physics2D.Raycast(new Vector2(transform.position.x + width, transform.position.y), Vector2.right, rayCastLengthCheck);
+        Debug.DrawRay(new Vector2(transform.position.x + width, transform.position.y + (height - 0.2f)), Vector2.right * rayCastLengthCheck, Color.green);
+
+        bool isWallRight3 = Physics2D.Raycast(new Vector2(transform.position.x + width, transform.position.y), Vector2.right, rayCastLengthCheck);
+        Debug.DrawRay(new Vector2(transform.position.x + width, transform.position.y - (height - 0.2f)), Vector2.right * rayCastLengthCheck, Color.blue);
+
+        if (isWallLeft1 || isWallLeft2 || isWallLeft3) {
             return -1;
         }
-        else if (isWallRight) {
+        else if (isWallRight1 || isWallRight2 || isWallRight3) {
             return 1;
         }
         else {
