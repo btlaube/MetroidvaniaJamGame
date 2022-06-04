@@ -40,10 +40,10 @@ public class NewPlayerMovement : MonoBehaviour
     }
 
     void Update() {
-        // 1
+        
         input.x = Input.GetAxis("Horizontal");
         input.y = Input.GetAxis("Jump");
-        // 2
+        
         if (rb.velocity.x > 1f) {
             sr.flipX = false;
         }
@@ -74,7 +74,7 @@ public class NewPlayerMovement : MonoBehaviour
         //Control continuous jump if Spring is active
         if(!spring) {
             if (jumpDuration > jumpDurationThreshold) input.y = 0f;
-        }      
+        }
 
         //Control gravity for wall slide
         if(PlayerIsOnWall() && !PlayerIsOnGround()) {
@@ -121,16 +121,19 @@ public class NewPlayerMovement : MonoBehaviour
         }
 
         var yVelocity = 0f;
-        if (PlayerIsTouchingGroundOrWall() && input.y == 1) {
-            //rb.velocity = new Vector2(GetWallDirection() * speed * 0.75f, rb.velocity.y);
+        if (PlayerIsTouchingGroundOrWall() && input.y > 0) {
             yVelocity = jump;
             am.Play("Jump");
-            //jumpDuration = jumpDurationThreshold;
+        }
+        else if(PlayerIsOnCeiling() && input.y > 0) {
+            yVelocity = -jump;
+            am.Play("Jump");
         }
         else {
             yVelocity = rb.velocity.y;
         }
 
+        //Controls movement on x-axis
         //Prevents movement on x-axis depending on if player is on a wall to prevent player from clinging to wall
         if(GetWallDirection() == -1) {
             if(input.x > 0) {
@@ -148,24 +151,18 @@ public class NewPlayerMovement : MonoBehaviour
         
         rb.velocity = new Vector2(xVelocity, yVelocity);
 
+        //Controls movement on x-axis for wall jumping
         if(PlayerIsOnWall() && !PlayerIsOnGround() && input.y == 1) {
             rb.velocity = new Vector2(-GetWallDirection() * speed * 0.75f, rb.velocity.y);
-            //am.Play("Jump");
         }
-/*
-        if(PlayerIsOnCeiling() && input.y > 0) {
-            rb.velocity = new Vector2(rb.velocity.x, -jumpSpeed);
-            am.Play("Jump");
-            //jumpDuration = jumpDurationThreshold;
-        }
-*/
+
         if (isJumping && jumpDuration < jumpDurationThreshold) {
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         }
     }
 
     public bool PlayerIsOnGround() {
-        // 1
+        
         bool groundCheck1 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - height), -Vector2.up, rayCastLengthCheck);
         Debug.DrawRay(new Vector2(transform.position.x, transform.position.y - height), transform.TransformDirection(-Vector2.up) * rayCastLengthCheck, Color.red);
 
@@ -174,7 +171,7 @@ public class NewPlayerMovement : MonoBehaviour
 
         bool groundCheck3 = Physics2D.Raycast(new Vector2( transform.position.x - (width - 0.2f), transform.position.y - height), -Vector2.up, rayCastLengthCheck);
         Debug.DrawRay(new Vector2( transform.position.x - (width - 0.2f), transform.position.y - height), -Vector2.up * rayCastLengthCheck, Color.green);
-        // 2
+        
         if (groundCheck1 || groundCheck2 || groundCheck3) {
             return true;
         }
@@ -184,12 +181,11 @@ public class NewPlayerMovement : MonoBehaviour
     }
 
     public bool PlayerIsOnWall() {
-        // 1
+        
         bool wallOnleft = Physics2D.Raycast(new Vector2(transform.position.x - width, transform.position.y), -Vector2.right, rayCastLengthCheck);
         bool wallOnRight = Physics2D.Raycast(new Vector2(transform.position.x + width, transform.position.y), Vector2.right, rayCastLengthCheck);
-        // 2
+        
         if (wallOnleft || wallOnRight) {
-            //rb.velocity = new Vector2(0f, 0f);
             return true;
         }
         else {
@@ -255,10 +251,9 @@ public class NewPlayerMovement : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D other) {
-        if(PlayerIsOnWall()) {
+        if(PlayerIsOnWall() || PlayerIsOnCeiling()) {
             rb.velocity = new Vector2(0f, 0f);
-        }
-        
+        }        
     }
 
 }
