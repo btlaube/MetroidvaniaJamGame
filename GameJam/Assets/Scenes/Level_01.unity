@@ -175,6 +175,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1624602570076564374, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: cdeefd50cdae67841abadd67e0018dc2, type: 3}
     - target: {fileID: 1624602570076564375, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -219,9 +223,61 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1624602570076564376, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1624602570076564376, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1624602570076564376, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1624602570076564376, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1624602570076564376, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
+      propertyPath: m_SpriteTilingProperty.border.x
+      value: 0.1875
+      objectReference: {fileID: 0}
+    - target: {fileID: 1624602570076564376, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
+      propertyPath: m_SpriteTilingProperty.border.y
+      value: 0.03125
+      objectReference: {fileID: 0}
+    - target: {fileID: 1624602570076564376, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
+      propertyPath: m_SpriteTilingProperty.border.z
+      value: 0.125
+      objectReference: {fileID: 0}
     - target: {fileID: 1624602570076564378, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1624602570103251370, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
+      propertyPath: m_RefResolutionX
+      value: 320
+      objectReference: {fileID: 0}
+    - target: {fileID: 1624602570103251370, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
+      propertyPath: m_RefResolutionY
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1624602570103251372, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
+      propertyPath: m_ForceIntoRT
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1624602570103251372, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
+      propertyPath: orthographic size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1624602570103251372, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
+      propertyPath: m_NormalizedViewPortRect.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1624602570103251372, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
+      propertyPath: m_NormalizedViewPortRect.height
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
