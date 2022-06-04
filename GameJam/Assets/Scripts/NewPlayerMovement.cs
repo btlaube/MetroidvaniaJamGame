@@ -26,6 +26,11 @@ public class NewPlayerMovement : MonoBehaviour
 
     public AudioManager am;
 
+    [SerializeField]
+    private bool spring;
+    [SerializeField]
+    private bool magnet;
+
     void Awake() {
         sr = GetComponent<SpriteRenderer>();
         //animator = GetComponent<Animator>();
@@ -66,7 +71,9 @@ public class NewPlayerMovement : MonoBehaviour
             }
         }
 
-        //if (jumpDuration > jumpDurationThreshold) input.y = 0f;
+        if(!spring) {
+            if (jumpDuration > jumpDurationThreshold) input.y = 0f;
+        }      
 
         if(PlayerIsOnWall() && !PlayerIsOnGround()) {
             rb.gravityScale = 0.1f;
@@ -81,12 +88,15 @@ public class NewPlayerMovement : MonoBehaviour
             rb.gravityScale = 1f;
         }
 
-        if(PlayerIsOnCeiling()) {
-            rb.gravityScale = 0f;
+        if(magnet) {
+            if(PlayerIsOnCeiling()) {
+                rb.gravityScale = 0f;
+            }
+            else if(!PlayerIsOnWall()){
+                rb.gravityScale = 1f;
+            }
         }
-        else if(!PlayerIsOnWall()){
-            rb.gravityScale = 1f;
-        }
+        
     }
 
     void FixedUpdate() {
@@ -111,6 +121,7 @@ public class NewPlayerMovement : MonoBehaviour
         if (PlayerIsTouchingGroundOrWall() && input.y == 1) {
             yVelocity = jump;
             am.Play("Jump");
+            jumpDuration = jumpDurationThreshold;
         }
         else {
             yVelocity = rb.velocity.y;
@@ -138,11 +149,13 @@ public class NewPlayerMovement : MonoBehaviour
         if(PlayerIsOnWall() && !PlayerIsOnGround() && input.y == 1) {
             rb.velocity = new Vector2(-GetWallDirection() * speed * 0.75f, rb.velocity.y);
             am.Play("Jump");
+            jumpDuration = jumpDurationThreshold;
         }
 
         if(PlayerIsOnCeiling() && input.y > 0) {
             rb.velocity = new Vector2(rb.velocity.x, -jumpSpeed);
             am.Play("Jump");
+            jumpDuration = jumpDurationThreshold;
         }
 
         if (isJumping && jumpDuration < jumpDurationThreshold) {
