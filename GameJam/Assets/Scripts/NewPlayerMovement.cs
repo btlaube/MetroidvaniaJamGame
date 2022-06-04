@@ -24,6 +24,8 @@ public class NewPlayerMovement : MonoBehaviour
 
     public float jump = 14f;
 
+    public AudioManager am;
+
     void Awake() {
         sr = GetComponent<SpriteRenderer>();
         //animator = GetComponent<Animator>();
@@ -82,7 +84,7 @@ public class NewPlayerMovement : MonoBehaviour
         if(PlayerIsOnCeiling()) {
             rb.gravityScale = 0f;
         }
-        else {
+        else if(!PlayerIsOnWall()){
             rb.gravityScale = 1f;
         }
     }
@@ -108,6 +110,7 @@ public class NewPlayerMovement : MonoBehaviour
         var yVelocity = 0f;
         if (PlayerIsTouchingGroundOrWall() && input.y == 1) {
             yVelocity = jump;
+            am.Play("Jump");
         }
         else {
             yVelocity = rb.velocity.y;
@@ -117,13 +120,13 @@ public class NewPlayerMovement : MonoBehaviour
         if(GetWallDirection() == -1) {
             if(input.x > 0) {
                 rb.AddForce(new Vector2(((input.x * speed) - rb.velocity.x) * acceleration, 0));
-                jumpDuration = 0f;
+                //jumpDuration = 0f;
             }
         }
         else if(GetWallDirection() == 1) {
             if(input.x < 0) {
                 rb.AddForce(new Vector2(((input.x * speed) - rb.velocity.x) * acceleration, 0));
-                jumpDuration = 0f;
+                //jumpDuration = 0f;
             }
         }
         else {
@@ -134,10 +137,12 @@ public class NewPlayerMovement : MonoBehaviour
 
         if(PlayerIsOnWall() && !PlayerIsOnGround() && input.y == 1) {
             rb.velocity = new Vector2(-GetWallDirection() * speed * 0.75f, rb.velocity.y);
+            am.Play("Jump");
         }
 
         if(PlayerIsOnCeiling() && input.y > 0) {
             rb.velocity = new Vector2(rb.velocity.x, -jumpSpeed);
+            am.Play("Jump");
         }
 
         if (isJumping && jumpDuration < jumpDurationThreshold) {
