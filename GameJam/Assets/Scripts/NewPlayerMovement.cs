@@ -78,6 +78,13 @@ public class NewPlayerMovement : MonoBehaviour
         else {
             rb.gravityScale = 1f;
         }
+
+        if(PlayerIsOnCeiling()) {
+            rb.gravityScale = 0f;
+        }
+        else {
+            rb.gravityScale = 1f;
+        }
     }
 
     void FixedUpdate() {
@@ -108,13 +115,13 @@ public class NewPlayerMovement : MonoBehaviour
 
         // 3
         if(GetWallDirection() == -1) {
-            if(input.x != -1) {
+            if(input.x > 0) {
                 rb.AddForce(new Vector2(((input.x * speed) - rb.velocity.x) * acceleration, 0));
                 jumpDuration = 0f;
             }
         }
         else if(GetWallDirection() == 1) {
-            if(input.x != 1) {
+            if(input.x < 0) {
                 rb.AddForce(new Vector2(((input.x * speed) - rb.velocity.x) * acceleration, 0));
                 jumpDuration = 0f;
             }
@@ -126,7 +133,11 @@ public class NewPlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(xVelocity, yVelocity);
 
         if(PlayerIsOnWall() && !PlayerIsOnGround() && input.y == 1) {
-            rb.velocity = new Vector2(-GetWallDirection() * speed * 0.75f, rb.velocity.y);            
+            rb.velocity = new Vector2(-GetWallDirection() * speed * 0.75f, rb.velocity.y);
+        }
+
+        if(PlayerIsOnCeiling() && input.y > 0) {
+            rb.velocity = new Vector2(rb.velocity.x, -jumpSpeed);
         }
 
         if (isJumping && jumpDuration < jumpDurationThreshold) {
@@ -160,6 +171,24 @@ public class NewPlayerMovement : MonoBehaviour
         // 2
         if (wallOnleft || wallOnRight) {
             //rb.velocity = new Vector2(0f, 0f);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public bool PlayerIsOnCeiling() {
+        bool groundCheck1 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + height), Vector2.up, rayCastLengthCheck);
+        Debug.DrawRay(new Vector2(transform.position.x, transform.position.y + height), transform.TransformDirection(Vector2.up) * rayCastLengthCheck, Color.red);
+
+        bool groundCheck2 = Physics2D.Raycast(new Vector2(transform.position.x + (width - 0.2f), transform.position.y + height), Vector2.up, rayCastLengthCheck);
+        Debug.DrawRay(new Vector2(transform.position.x + (width - 0.2f), transform.position.y + height), Vector2.up * rayCastLengthCheck, Color.blue);
+
+        bool groundCheck3 = Physics2D.Raycast(new Vector2( transform.position.x - (width - 0.2f), transform.position.y + height), Vector2.up, rayCastLengthCheck);
+        Debug.DrawRay(new Vector2( transform.position.x - (width - 0.2f), transform.position.y + height), Vector2.up * rayCastLengthCheck, Color.green);
+
+        if (groundCheck1 || groundCheck2 || groundCheck3) {
             return true;
         }
         else {
