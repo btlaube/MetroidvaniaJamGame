@@ -59,22 +59,24 @@ public class NewPlayerMovement : MonoBehaviour
             jumpDuration = 0f;
         }
 
-        if (PlayerIsOnGround() && isJumping == false) {
+        if (PlayerIsOnGround()) {
             if (input.y > 0f) {
                 isJumping = true;
             }
         }
 
-        if (PlayerIsOnWall() && isJumping == false) {
+        if (PlayerIsOnWall()) {
             if (input.y > 0f) {
                 isJumping = true;
             }
         }
 
+        //Control continuous jump if Spring is active
         if(!spring) {
             if (jumpDuration > jumpDurationThreshold) input.y = 0f;
         }      
 
+        //Control gravity for wall slide
         if(PlayerIsOnWall() && !PlayerIsOnGround()) {
             rb.gravityScale = 0.1f;
             if (GetWallDirection() == -1) {
@@ -88,6 +90,7 @@ public class NewPlayerMovement : MonoBehaviour
             rb.gravityScale = 1f;
         }
 
+        //Control gravity for ceiling cling if Magnet is active
         if(magnet) {
             if(PlayerIsOnCeiling()) {
                 rb.gravityScale = 0f;
@@ -100,16 +103,16 @@ public class NewPlayerMovement : MonoBehaviour
     }
 
     void FixedUpdate() {
-        // 1
+        
         var acceleration = 0f;
-        if (PlayerIsOnGround()) {
+        if (PlayerIsOnGround() || PlayerIsOnCeiling()) {
             acceleration = accel;
         }
         else {
             acceleration = airAccel;
         }
-        var xVelocity = 0f;
-        // 2
+
+        var xVelocity = 0f;        
         if (PlayerIsOnGround() && input.x == 0) {
             xVelocity = 0f;
         }
@@ -119,45 +122,43 @@ public class NewPlayerMovement : MonoBehaviour
 
         var yVelocity = 0f;
         if (PlayerIsTouchingGroundOrWall() && input.y == 1) {
+            //rb.velocity = new Vector2(GetWallDirection() * speed * 0.75f, rb.velocity.y);
             yVelocity = jump;
             am.Play("Jump");
-            jumpDuration = jumpDurationThreshold;
+            //jumpDuration = jumpDurationThreshold;
         }
         else {
             yVelocity = rb.velocity.y;
         }
 
-        // 3
+        //Prevents movement on x-axis depending on if player is on a wall to prevent player from clinging to wall
         if(GetWallDirection() == -1) {
             if(input.x > 0) {
                 rb.AddForce(new Vector2(((input.x * speed) - rb.velocity.x) * acceleration, 0));
-                //jumpDuration = 0f;
             }
         }
         else if(GetWallDirection() == 1) {
             if(input.x < 0) {
                 rb.AddForce(new Vector2(((input.x * speed) - rb.velocity.x) * acceleration, 0));
-                //jumpDuration = 0f;
             }
         }
         else {
             rb.AddForce(new Vector2(((input.x * speed) - rb.velocity.x) * acceleration, 0));
         }
-        // 4
+        
         rb.velocity = new Vector2(xVelocity, yVelocity);
 
         if(PlayerIsOnWall() && !PlayerIsOnGround() && input.y == 1) {
             rb.velocity = new Vector2(-GetWallDirection() * speed * 0.75f, rb.velocity.y);
-            am.Play("Jump");
-            jumpDuration = jumpDurationThreshold;
+            //am.Play("Jump");
         }
-
+/*
         if(PlayerIsOnCeiling() && input.y > 0) {
             rb.velocity = new Vector2(rb.velocity.x, -jumpSpeed);
             am.Play("Jump");
-            jumpDuration = jumpDurationThreshold;
+            //jumpDuration = jumpDurationThreshold;
         }
-
+*/
         if (isJumping && jumpDuration < jumpDurationThreshold) {
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         }
