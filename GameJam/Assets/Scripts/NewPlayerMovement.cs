@@ -7,22 +7,20 @@ public class NewPlayerMovement : MonoBehaviour
 {
     public float speed = 14f;
     public float accel = 6f;
+    public bool isJumping;
+    public float jumpSpeed = 8f;
+    public float width;
+    public float height;
+    public float jumpDurationThreshold = 0.25f;
+    public float airAccel = 3f;
+    public float jump = 14f;
+
     private Vector2 input;
     private SpriteRenderer sr;
     private Rigidbody2D rb;
-    private Animator animator;
-    public bool isJumping;
-    public float jumpSpeed = 8f;
+    private Animator animator;   
     private float rayCastLengthCheck = 0.1f;
-    private float width;
-    private float height;
-
-    public float jumpDurationThreshold = 0.25f;
-    private float jumpDuration; 
-
-    public float airAccel = 3f;
-
-    public float jump = 14f;
+    private float jumpDuration;
 
     public AudioManager am;
 
@@ -40,14 +38,16 @@ public class NewPlayerMovement : MonoBehaviour
     }
 
     void Update() {
+        //width = GetComponent<Collider2D>().bounds.extents.x + 0.001f;
+        //height = GetComponent<Collider2D>().bounds.extents.y + 0.001f;
         
         input.x = Input.GetAxis("Horizontal");
         input.y = Input.GetAxis("Jump");
         
-        if (rb.velocity.x > 1f) {
+        if (input.x > 0.1f) {
             sr.flipX = false;
         }
-        else if (rb.velocity.x < -1f) {
+        else if (input.x < -0.1f) {
             sr.flipX = true;
         }
 
@@ -253,7 +253,7 @@ public class NewPlayerMovement : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other) {
         if(PlayerIsOnWall() || PlayerIsOnCeiling()) {
             rb.velocity = new Vector2(0f, 0f);
-        }        
+        }
     }
 
 }
