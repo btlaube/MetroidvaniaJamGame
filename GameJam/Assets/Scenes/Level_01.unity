@@ -123,23 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &254723168 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1624602570076564378, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
-  m_PrefabInstance: {fileID: 1404002059}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &254723176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 254723168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2163099303376e47bdb179e49f80582, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &300278322
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,7 +189,7 @@ PrefabInstance:
     - target: {fileID: 1624602570076564374, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -6367560908665664636, guid: 40de9a8703e2e5a47882b0b86451c741, type: 3}
+      objectReference: {fileID: 768752015, guid: 5ab15e66ab92e5d41908cce91f2c657c, type: 3}
     - target: {fileID: 1624602570076564375, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -322,6 +305,18 @@ PrefabInstance:
     - target: {fileID: 1624602570103251372, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
       propertyPath: orthographic size
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1624602570103251372, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0.4433962
+      objectReference: {fileID: 0}
+    - target: {fileID: 1624602570103251372, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.4433962
+      objectReference: {fileID: 0}
+    - target: {fileID: 1624602570103251372, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.4433962
       objectReference: {fileID: 0}
     - target: {fileID: 1624602570103251372, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
