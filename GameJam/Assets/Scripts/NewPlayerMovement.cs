@@ -33,7 +33,7 @@ public class NewPlayerMovement : MonoBehaviour
 
     void Awake() {
         sr = GetComponent<SpriteRenderer>();
-        //animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         width = GetComponent<Collider2D>().bounds.extents.x + 0.001f;
         height = GetComponent<Collider2D>().bounds.extents.y + 0.001f;
@@ -47,6 +47,9 @@ public class NewPlayerMovement : MonoBehaviour
         
         input.x = Input.GetAxis("Horizontal");
         input.y = Input.GetAxis("Jump");
+
+        animator.SetFloat("Speed", Mathf.Abs(input.x));
+        //animator.SetFloat("YSpeed", rb.velocity.y);
         
         if (input.x > 0.1f) {
             sr.flipX = false;
@@ -57,22 +60,18 @@ public class NewPlayerMovement : MonoBehaviour
 
         if (input.y >= 1f) {
             jumpDuration += Time.deltaTime;
-        }
-        else {
+            animator.SetBool("IsJumping", true);
+        } else {
             isJumping = false;
+            animator.SetBool("IsJumping", false);
             jumpDuration = 0f;
         }
 
-        if (PlayerIsOnGround()) {
+        if (PlayerIsOnGround()&& isJumping == false) {
             if (input.y > 0f) {
                 isJumping = true;
             }
-        }
-
-        if (PlayerIsOnWall()) {
-            if (input.y > 0f) {
-                isJumping = true;
-            }
+            animator.SetBool("IsOnWall", false);
         }
 
         //Control continuous jump if Spring is active
@@ -158,6 +157,15 @@ public class NewPlayerMovement : MonoBehaviour
         //Controls movement on x-axis for wall jumping
         if(PlayerIsOnWall() && !PlayerIsOnGround() && input.y == 1) {
             rb.velocity = new Vector2(-GetWallDirection() * speed * 0.75f, rb.velocity.y);
+            animator.SetBool("IsOnWall", false);
+            animator.SetBool("IsJumping", true);
+        }
+        else if (!PlayerIsOnWall()) {
+            animator.SetBool("IsOnWall", false);
+            animator.SetBool("IsJumping", true);
+        }
+        if (PlayerIsOnWall() && !PlayerIsOnGround()) {
+            animator.SetBool("IsOnWall", true);
         }
 
         if (isJumping && jumpDuration < jumpDurationThreshold) {
