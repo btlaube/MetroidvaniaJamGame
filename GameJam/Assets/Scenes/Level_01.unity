@@ -1960,26 +1960,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8739230162081185880, guid: 4fa4c38d7047a614cbe55bc5d8ff1aa1, type: 3}
-      propertyPath: sounds.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8739230162081185880, guid: 4fa4c38d7047a614cbe55bc5d8ff1aa1, type: 3}
-      propertyPath: sounds.Array.data[0].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
-    - target: {fileID: 8739230162081185880, guid: 4fa4c38d7047a614cbe55bc5d8ff1aa1, type: 3}
-      propertyPath: sounds.Array.data[0].name
-      value: Jump
-      objectReference: {fileID: 0}
-    - target: {fileID: 8739230162081185880, guid: 4fa4c38d7047a614cbe55bc5d8ff1aa1, type: 3}
-      propertyPath: sounds.Array.data[0].pitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8739230162081185880, guid: 4fa4c38d7047a614cbe55bc5d8ff1aa1, type: 3}
-      propertyPath: sounds.Array.data[0].volume
-      value: 0.069
-      objectReference: {fileID: 0}
     - target: {fileID: 8865277902766781642, guid: 4fa4c38d7047a614cbe55bc5d8ff1aa1, type: 3}
       propertyPath: m_RootOrder
       value: 0
