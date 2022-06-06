@@ -8,12 +8,13 @@ public class NewPlayerMovement : MonoBehaviour
     public float speed = 14f;
     public float accel = 6f;
     public bool isJumping;
+    public bool isFalling;
     public float jumpSpeed = 8f;
     public float width;
     public float height;
     public float widthOffset;
     public float heightOffset;
-    public float jumpDurationThreshold = 0.25f;
+    public float jumpDurationThreshold = 2.25f;
     public float airAccel = 3f;
     public float jump = 14f;
 
@@ -26,8 +27,6 @@ public class NewPlayerMovement : MonoBehaviour
 
     public AudioManager am;
 
-    [SerializeField]
-    private bool spring;
     [SerializeField]
     private bool magnet;
 
@@ -42,14 +41,10 @@ public class NewPlayerMovement : MonoBehaviour
     }
 
     void Update() {
-        //width = GetComponent<Collider2D>().bounds.extents.x + 0.001f;
-        //height = GetComponent<Collider2D>().bounds.extents.y + 0.001f;
-        
         input.x = Input.GetAxis("Horizontal");
         input.y = Input.GetAxis("Jump");
 
         animator.SetFloat("Speed", Mathf.Abs(input.x));
-        //animator.SetFloat("YSpeed", rb.velocity.y);
         
         if (input.x > 0.1f) {
             sr.flipX = false;
@@ -58,13 +53,21 @@ public class NewPlayerMovement : MonoBehaviour
             sr.flipX = true;
         }
 
-        if (input.y >= 1f) {
+        if (input.y >= 1f && jumpDuration < jumpDurationThreshold) {
             jumpDuration += Time.deltaTime;
             animator.SetBool("IsJumping", true);
-        } else {
+        }
+        else if(input.y < 1) {
             isJumping = false;
             animator.SetBool("IsJumping", false);
             jumpDuration = 0f;
+        }
+
+        if(!PlayerIsOnCeiling() && !PlayerIsOnGround() && !PlayerIsOnWall() && !isJumping) {
+            animator.SetBool("IsFalling", true);
+        }
+        else {
+            animator.SetBool("IsFalling", false);
         }
 
         if (PlayerIsOnGround() && isJumping == false) {
@@ -72,11 +75,6 @@ public class NewPlayerMovement : MonoBehaviour
                 isJumping = true;
             }
             animator.SetBool("IsOnWall", false);
-        }
-
-        //Control continuous jump if Spring is active
-        if(!spring) {
-            if (jumpDuration > jumpDurationThreshold) input.y = 0f;
         }
 
         //Control gravity for wall slide
@@ -170,6 +168,10 @@ public class NewPlayerMovement : MonoBehaviour
 
         if (isJumping && jumpDuration < jumpDurationThreshold) {
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+        }
+        else {
+            isJumping = false;
+            animator.SetBool("IsJumping", false);
         }
     }
 
