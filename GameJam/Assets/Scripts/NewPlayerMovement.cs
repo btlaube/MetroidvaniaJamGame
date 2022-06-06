@@ -67,7 +67,7 @@ public class NewPlayerMovement : MonoBehaviour
             jumpDuration = 0f;
         }
 
-        if (PlayerIsOnGround()&& isJumping == false) {
+        if (PlayerIsOnGround() && isJumping == false) {
             if (input.y > 0f) {
                 isJumping = true;
             }
