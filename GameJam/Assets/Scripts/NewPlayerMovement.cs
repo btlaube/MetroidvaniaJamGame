@@ -91,6 +91,8 @@ public class NewPlayerMovement : MonoBehaviour
             rb.gravityScale = 1f;
         }
 
+        if (jumpDuration > jumpDurationThreshold) input.y = 0f;
+
         //Control gravity for ceiling cling if Magnet is active
         if(magnet) {
             if(PlayerIsOnCeiling()) {
