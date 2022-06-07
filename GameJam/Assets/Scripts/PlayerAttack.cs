@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    public float attackRecoil;
 
     private Animator animator;
+    private Rigidbody2D rb;
     private Vector2 input;
     private bool isAttacking;
 
-
     void Awake() {
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Start is called before the first frame update
@@ -26,13 +28,14 @@ public class PlayerAttack : MonoBehaviour
         input.x = Input.GetAxis("Fire1");
         //Debug.Log(input.x);
         if((Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)) && !isAttacking) {
-            StartAttack();
+            Attack();
         }
     }
 
-    public void StartAttack() {
+    public void Attack() {
         isAttacking = true;
         animator.SetBool("IsAttacking", true);
+        rb.position -= new Vector2(attackRecoil, 0);
     }
 
     public void DoneAttacking() {
