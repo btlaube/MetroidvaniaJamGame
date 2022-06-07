@@ -41,5 +41,4 @@ public class PlayerAttack : MonoBehaviour
         //isAttacking = false;
         //input.x = 0f;
     }
-
 }
