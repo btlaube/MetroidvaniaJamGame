@@ -17,6 +17,7 @@ public class NewPlayerMovement : MonoBehaviour
     public float jumpDurationThreshold = 2.25f;
     public float airAccel = 3f;
     public float jump = 14f;
+    public AudioManager am;
 
     private Vector2 input;
     private SpriteRenderer sr;
@@ -24,8 +25,6 @@ public class NewPlayerMovement : MonoBehaviour
     private Animator animator;   
     private float rayCastLengthCheck = 0.025f;
     private float jumpDuration;
-
-    public AudioManager am;
 
     [SerializeField]
     private bool magnet;

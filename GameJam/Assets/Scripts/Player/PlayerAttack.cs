@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     public float attackRecoil;
+    public AudioManager am;
 
     private Animator animator;
     private Rigidbody2D rb;
@@ -33,6 +34,7 @@ public class PlayerAttack : MonoBehaviour
     }
 
     public void Attack() {
+        am.Play("Attack");
         isAttacking = true;
         animator.SetBool("IsAttacking", true);
         rb.position -= new Vector2(attackRecoil, 0);
