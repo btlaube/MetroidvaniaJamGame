@@ -40,7 +40,7 @@ public class NewPlayerMovement : MonoBehaviour
         heightOffset = GetComponent<Collider2D>().offset.y;
     }
 
-    void Update() {
+    void Update() {        
         input.x = Input.GetAxis("Horizontal");
         input.y = Input.GetAxis("Jump");
 
