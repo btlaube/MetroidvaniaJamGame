@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32a582a22e72e2c49b03a9c9671c5947, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 14
+  speed: 10
   accel: 6
   isJumping: 0
   isFalling: 0
@@ -195,3 +195,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRecoil: 0
+  am: {fileID: 0}

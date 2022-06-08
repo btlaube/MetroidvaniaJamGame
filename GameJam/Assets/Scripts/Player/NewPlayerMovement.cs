@@ -27,6 +27,8 @@ public class NewPlayerMovement : MonoBehaviour
     private float jumpDuration;
 
     [SerializeField]
+    private bool gecko;
+    [SerializeField]
     private bool magnet;
 
     void Awake() {
@@ -77,18 +79,21 @@ public class NewPlayerMovement : MonoBehaviour
         }
 
         //Control gravity for wall slide
-        if(PlayerIsOnWall() && !PlayerIsOnGround()) {
-            rb.gravityScale = 0.1f;
-            if (GetWallDirection() == -1) {
-                sr.flipX = false;
+        if(gecko) {
+            if(PlayerIsOnWall() && !PlayerIsOnGround()) {
+                rb.gravityScale = 0.1f;
+                if (GetWallDirection() == -1) {
+                    sr.flipX = false;
+                }
+                else if (GetWallDirection() == 1) {
+                    sr.flipX = true;
+                }
             }
-            else if (GetWallDirection() == 1) {
-                sr.flipX = true;
+            else {
+                rb.gravityScale = 1f;
             }
         }
-        else {
-            rb.gravityScale = 1f;
-        }
+        
 
         if (jumpDuration > jumpDurationThreshold) input.y = 0f;
 
@@ -123,7 +128,11 @@ public class NewPlayerMovement : MonoBehaviour
         }
 
         var yVelocity = 0f;
-        if (PlayerIsTouchingGroundOrWall() && input.y > 0) {
+        if (PlayerIsOnGround() && input.y > 0) {
+            yVelocity = jump;
+            am.Play("Jump");
+        }
+        else if(PlayerIsOnWall() && input.y > 0 && gecko) {
             yVelocity = jump;
             am.Play("Jump");
         }
@@ -154,7 +163,7 @@ public class NewPlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(xVelocity, yVelocity);
 
         //Controls movement on x-axis for wall jumping
-        if(PlayerIsOnWall() && !PlayerIsOnGround() && input.y == 1) {
+        if(PlayerIsOnWall() && !PlayerIsOnGround() && input.y == 1 && gecko) {
             rb.velocity = new Vector2(-GetWallDirection() * speed * 0.75f, rb.velocity.y);
             animator.SetBool("IsOnWall", false);
             animator.SetBool("IsJumping", true);
@@ -163,7 +172,7 @@ public class NewPlayerMovement : MonoBehaviour
             animator.SetBool("IsOnWall", false);
             animator.SetBool("IsJumping", true);
         }
-        if (PlayerIsOnWall() && !PlayerIsOnGround()) {
+        if (PlayerIsOnWall() && !PlayerIsOnGround() && gecko) {
             animator.SetBool("IsOnWall", true);
         }
 
