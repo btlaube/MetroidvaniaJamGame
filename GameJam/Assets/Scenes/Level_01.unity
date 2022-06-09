@@ -10274,6 +10274,10 @@ PrefabInstance:
       propertyPath: am
       value: 
       objectReference: {fileID: 847711664}
+    - target: {fileID: 1624602570076564379, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
+      propertyPath: gecko
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4772052414847111635, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
       propertyPath: am
       value: 
