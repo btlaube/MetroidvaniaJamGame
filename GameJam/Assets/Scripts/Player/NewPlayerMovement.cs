@@ -42,7 +42,7 @@ public class NewPlayerMovement : MonoBehaviour
     }
 
     void Update() {   
-        if(!(GetComponent<Player>().isTakingDamage)) {
+        //if(!(GetComponent<Player>().isTakingDamage)) {
             input.x = Input.GetAxis("Horizontal");
             input.y = Input.GetAxis("Jump");
 
@@ -107,11 +107,11 @@ public class NewPlayerMovement : MonoBehaviour
                     rb.gravityScale = 1f;
                 }
             }
-        }        
+        //}        
     }
 
     void FixedUpdate() {
-        if(!(GetComponent<Player>().isTakingDamage)) {
+        //if(!(GetComponent<Player>().isTakingDamage)) {
             var acceleration = 0f;
             if (PlayerIsOnGround() || PlayerIsOnCeiling()) {
                 acceleration = accel;
@@ -184,7 +184,7 @@ public class NewPlayerMovement : MonoBehaviour
                 isJumping = false;
                 animator.SetBool("IsJumping", false);
             }
-        }        
+        //}        
     }
 
     public bool PlayerIsOnGround() {

@@ -50,10 +50,10 @@ public class Player : MonoBehaviour
     void FixedUpdate() {
         if(isTakingDamage) {
             if(sr.flipX) {
-                rb.AddForce(new Vector2(((1 * GetComponent<NewPlayerMovement>().speed) - rb.velocity.x * 2) * GetComponent<NewPlayerMovement>().accel, 0));
+                rb.AddForce(new Vector2(((1 * GetComponent<NewPlayerMovement>().speed) - rb.velocity.x) * GetComponent<NewPlayerMovement>().accel, 0));
             }
             else {
-                rb.AddForce(new Vector2(((-1 * GetComponent<NewPlayerMovement>().speed) - rb.velocity.x * 2) * GetComponent<NewPlayerMovement>().accel, 0));
+                rb.AddForce(new Vector2(((-1 * GetComponent<NewPlayerMovement>().speed) - rb.velocity.x) * GetComponent<NewPlayerMovement>().accel, 0));
             }
         }        
     }
