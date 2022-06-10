@@ -199,6 +199,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 118796949}
   m_CullTransparentMesh: 1
+--- !u!1 &258104987 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3173226186129050170, guid: f7d0852301ecc8944b2be58fb1cea9e8, type: 3}
+  m_PrefabInstance: {fileID: 3173226186382955681}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &258104994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 258104987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 210ce33a819486b4f8b3ba34afb78beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 1
+  am: {fileID: 847711664}
 --- !u!1 &294152781
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,7 +282,7 @@ GameObject:
   m_Component:
   - component: {fileID: 300278324}
   - component: {fileID: 300278323}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -465,9 +484,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2142702236}
     m_Modifications:
+    - target: {fileID: 8784407449942051849, guid: fa331217aa4ac204d823e351b6181a7d, type: 3}
+      propertyPath: am
+      value: 
+      objectReference: {fileID: 847711664}
     - target: {fileID: 8784407449942051891, guid: fa331217aa4ac204d823e351b6181a7d, type: 3}
       propertyPath: m_Name
       value: Gecko
+      objectReference: {fileID: 0}
+    - target: {fileID: 8784407449942051891, guid: fa331217aa4ac204d823e351b6181a7d, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8784407449942051895, guid: fa331217aa4ac204d823e351b6181a7d, type: 3}
       propertyPath: m_RootOrder
@@ -531,7 +558,7 @@ GameObject:
   - component: {fileID: 1380532360}
   - component: {fileID: 1380532362}
   - component: {fileID: 1380532361}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9973,11 +10000,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1624602570076564375, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.85
+      value: -10.09375
       objectReference: {fileID: 0}
     - target: {fileID: 1624602570076564375, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -16.40625
+      value: -10.03125
       objectReference: {fileID: 0}
     - target: {fileID: 1624602570076564375, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -10022,6 +10049,10 @@ PrefabInstance:
     - target: {fileID: 1624602570076564378, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1624602570076564378, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1624602570076564378, guid: b59cb9ddbd6625a459a5583bee23f8b1, type: 3}
       propertyPath: m_TagString
@@ -10245,7 +10276,7 @@ GameObject:
   - component: {fileID: 1994780756}
   - component: {fileID: 1994780755}
   - component: {fileID: 1994780754}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Borders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11782,6 +11813,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bat
       objectReference: {fileID: 0}
+    - target: {fileID: 3173226186129050173, guid: f7d0852301ecc8944b2be58fb1cea9e8, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3173226186129050173, guid: f7d0852301ecc8944b2be58fb1cea9e8, type: 3}
+      propertyPath: m_EdgeRadius
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3173226186129050174, guid: f7d0852301ecc8944b2be58fb1cea9e8, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -11825,6 +11864,10 @@ PrefabInstance:
     - target: {fileID: 3173226186129050174, guid: f7d0852301ecc8944b2be58fb1cea9e8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730962389983567443, guid: f7d0852301ecc8944b2be58fb1cea9e8, type: 3}
+      propertyPath: damage
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7d0852301ecc8944b2be58fb1cea9e8, type: 3}

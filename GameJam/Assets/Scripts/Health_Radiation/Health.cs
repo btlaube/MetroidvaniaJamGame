@@ -26,7 +26,9 @@ public class Health : MonoBehaviour
                 animator.SetTrigger("Die");
 
                 GetComponent<Collider2D>().enabled = false;
-                GetComponentInParent<EnemyPatrol>().enabled = false;
+                if(GetComponentInParent<EnemyPatrol>() != null) {
+                    GetComponentInParent<EnemyPatrol>().enabled = false;
+                }                
 
                 dead = true;
             }            
@@ -34,7 +36,7 @@ public class Health : MonoBehaviour
     }
 
     public void Deactivate() {
-        Destroy(transform.parent.gameObject);
+        //Destroy(transform.parent.gameObject);
         Destroy(gameObject);
     }
 
