@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1624602570076564379}
   - component: {fileID: 1493433209743609456}
   - component: {fileID: 4772052414847111635}
+  - component: {fileID: 1144036342625684293}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -161,6 +162,7 @@ MonoBehaviour:
   airAccel: 3
   jump: 14
   am: {fileID: 0}
+  gecko: 0
   magnet: 0
 --- !u!95 &1493433209743609456
 Animator:
@@ -195,4 +197,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRecoil: 0
+  am: {fileID: 0}
+  isAttacking: 0
+--- !u!114 &1144036342625684293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624602570076564378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b17846778a6d8c4b9873130ae63b5c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingRadiation: 0
+  maxRadiation: 5
   am: {fileID: 0}

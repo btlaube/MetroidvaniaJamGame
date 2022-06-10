@@ -10,24 +10,16 @@ public class PlayerAttack : MonoBehaviour
     private Animator animator;
     private Rigidbody2D rb;
     private Vector2 input;
-    private bool isAttacking;
+    [SerializeField] private bool isAttacking;
 
     void Awake() {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         input.x = Input.GetAxis("Fire1");
-        //Debug.Log(input.x);
         if((Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)) && !isAttacking) {
             Attack();
         }
@@ -37,13 +29,12 @@ public class PlayerAttack : MonoBehaviour
         am.Play("Attack");
         isAttacking = true;
         animator.SetBool("IsAttacking", true);
+        animator.SetTrigger("Attack");
         rb.position -= new Vector2(attackRecoil, 0);
     }
 
     public void DoneAttacking() {
         isAttacking = false;
         animator.SetBool("IsAttacking", false);
-        //isAttacking = false;
-        //input.x = 0f;
     }
 }
