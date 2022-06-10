@@ -26,6 +26,7 @@ public class PlayerAttack : MonoBehaviour
     }
 
     public void Attack() {
+        transform.GetChild(0).gameObject.SetActive(true);
         am.Play("Attack");
         isAttacking = true;
         animator.SetBool("IsAttacking", true);
@@ -34,6 +35,7 @@ public class PlayerAttack : MonoBehaviour
     }
 
     public void DoneAttacking() {
+        transform.GetChild(0).gameObject.SetActive(false);
         isAttacking = false;
         animator.SetBool("IsAttacking", false);
     }

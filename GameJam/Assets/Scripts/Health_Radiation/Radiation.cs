@@ -17,7 +17,6 @@ public class Radiation : MonoBehaviour
     }
 
     public void AddRadiation(float radiation) {
-        Debug.Log(currentRadiation);
         currentRadiation = Mathf.Clamp(currentRadiation + radiation, startingRadiation, maxRadiation);
 
         if(currentRadiation < maxRadiation) {
@@ -27,6 +26,7 @@ public class Radiation : MonoBehaviour
         }
         else {
             if(!dead) {
+                StartCoroutine(myCamera.GetComponent<CameraShake>().Shake(0.2f, 0.2f));
                 am.Play("PlayerDie");
                 animator.SetTrigger("Die");
                 GetComponent<NewPlayerMovement>().enabled = false;
