@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3173226186129050174}
   - component: {fileID: 3173226186129050175}
-  - component: {fileID: 3173226186129050172}
   - component: {fileID: 3173226186129050173}
   - component: {fileID: 3173226186129050113}
   - component: {fileID: 7730962389983567443}
@@ -89,27 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &3173226186129050172
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3173226186129050170}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!61 &3173226186129050173
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -184,6 +162,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 1
-  am: {fileID: 0}
+  enemyDrop: {fileID: 2993379237518257885, guid: 6caa91e3fc1a0d54099cd6c857d66a86, type: 3}
   components:
   - {fileID: 7730962389983567443}

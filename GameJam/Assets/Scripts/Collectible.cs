@@ -8,8 +8,8 @@ public class Collectible : MonoBehaviour
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 
-    void OnTriggerEnter2D(Collider2D other) {
-        if(other.tag == "Player") {
+    void OnCollisionEnter2D(Collision2D other) {
+        if(other.gameObject.tag == "Player") {
             audioManager.Play("DnaCollect");
             gameObject.SetActive(false);
         }

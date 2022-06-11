@@ -162,7 +162,6 @@ MonoBehaviour:
   jumpDurationThreshold: 0.25
   airAccel: 3
   jump: 14
-  am: {fileID: 0}
   gecko: 0
   magnet: 0
 --- !u!95 &1493433209743609456
@@ -198,7 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRecoil: 0
-  am: {fileID: 0}
+  audioManager: {fileID: 0}
   isAttacking: 0
 --- !u!114 &1144036342625684293
 MonoBehaviour:
@@ -213,9 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingRadiation: 0
-  maxRadiation: 3
-  am: {fileID: 0}
-  myCamera: {fileID: 0}
+  maxRadiation: 5
 --- !u!1 &5701387119748327058
 GameObject:
   m_ObjectHideFlags: 0

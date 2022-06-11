@@ -4,6 +4,7 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private float startingHealth;
     public float currentHealth {get; private set;}
+    public GameObject enemyDrop;
 
     private AudioManager audioManager;
     private Animator animator;
@@ -36,6 +37,8 @@ public class Health : MonoBehaviour
                 }
 
                 dead = true;
+
+                Instantiate(enemyDrop, transform.position, Quaternion.identity);
             }            
         }
     }
