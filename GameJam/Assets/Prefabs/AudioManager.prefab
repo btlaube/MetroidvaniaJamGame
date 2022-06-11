@@ -47,13 +47,31 @@ MonoBehaviour:
   sounds:
   - name: Jump
     clip: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
-    volume: 0.069
+    volume: 0.051
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Attack
     clip: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
-    volume: 0.069
+    volume: 0.132
     pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DnaCollect
+    clip: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
+    volume: 0.17
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlayerHit
+    clip: {fileID: 8300000, guid: b9eff218e132a4e76be78840eca96fb2, type: 3}
+    volume: 0.17
+    pitch: 0.79
+    loop: 0
+    source: {fileID: 0}
+  - name: PlayerDie
+    clip: {fileID: 8300000, guid: 35fbad8cdde724f11ba6481f1e64af71, type: 3}
+    volume: 0.186
+    pitch: 0.54
     loop: 0
     source: {fileID: 0}

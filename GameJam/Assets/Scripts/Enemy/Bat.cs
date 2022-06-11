@@ -5,11 +5,7 @@ using UnityEngine;
 public class Bat : MonoBehaviour
 {
     public float speed;
-    public float visionDistance;
-    public float width;
-    public float height;
-    public float widthOffset;
-    public float heightOffset;
+    public float visionDistance;    
 
     [SerializeField] private float damage;
 
@@ -20,6 +16,10 @@ public class Bat : MonoBehaviour
     private float rayCastLengthCheck = 0.025f;
     private float attackCooldown;
     private float attackCooldownThreshold = 1f;
+    private float width;
+    private float height;
+    private float widthOffset;
+    private float heightOffset;
 
     void Awake() {
         target = GameObject.FindGameObjectWithTag("Player").transform;

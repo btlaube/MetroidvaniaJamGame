@@ -161,3 +161,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 2
   am: {fileID: 0}
+  components:
+  - {fileID: 8784407449942051848}
+  - {fileID: 0}

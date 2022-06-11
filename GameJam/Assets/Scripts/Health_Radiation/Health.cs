@@ -8,6 +8,7 @@ public class Health : MonoBehaviour
 
     private Animator animator;
     private bool dead;
+    [SerializeField] private Behaviour[] components;
 
     private void Awake() {
         currentHealth = 0;
@@ -29,6 +30,9 @@ public class Health : MonoBehaviour
                 if(GetComponentInParent<EnemyPatrol>() != null) {
                     GetComponentInParent<EnemyPatrol>().enabled = false;
                 }                
+                foreach(Behaviour comp in components) {
+                    comp.enabled = false;
+                }
 
                 dead = true;
             }            
@@ -36,7 +40,9 @@ public class Health : MonoBehaviour
     }
 
     public void Deactivate() {
-        //Destroy(transform.parent.gameObject);
+        if(transform.parent != null) {
+            Destroy(transform.parent.gameObject);
+        }
         Destroy(gameObject);
     }
 
