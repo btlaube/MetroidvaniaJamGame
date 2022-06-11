@@ -17,10 +17,8 @@ public class NewPlayerMovement : MonoBehaviour
     public float jumpDurationThreshold = 2.25f;
     public float airAccel = 3f;
     public float jump = 14f;
-    public AudioManager am;
 
-    public static NewPlayerMovement instance;
-
+    private AudioManager audioManager;
     private Vector2 input;
     private SpriteRenderer sr;
     private Rigidbody2D rb;
@@ -37,23 +35,15 @@ public class NewPlayerMovement : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+
         width = GetComponent<Collider2D>().bounds.extents.x + 0.001f;
         height = GetComponent<Collider2D>().bounds.extents.y + 0.001f;
         widthOffset = GetComponent<Collider2D>().offset.x;
-        heightOffset = GetComponent<Collider2D>().offset.y;
-
-        if (instance == null) {
-            instance = this;
-        }
-        else {
-            Destroy(gameObject);
-            return;
-        }
-        
-        DontDestroyOnLoad(gameObject);
+        heightOffset = GetComponent<Collider2D>().offset.y;        
     }
 
-    void Update() {   
+    void Update() {
         //if(!(GetComponent<Player>().isTakingDamage)) {
             input.x = Input.GetAxis("Horizontal");
             input.y = Input.GetAxis("Jump");
@@ -143,15 +133,15 @@ public class NewPlayerMovement : MonoBehaviour
             var yVelocity = 0f;
             if (PlayerIsOnGround() && input.y > 0) {
                 yVelocity = jump;
-                am.Play("Jump");
+                audioManager.Play("Jump");
             }
             else if(PlayerIsOnWall() && input.y > 0 && gecko) {
                 yVelocity = jump;
-                am.Play("Jump");
+                audioManager.Play("Jump");
             }
             else if(PlayerIsOnCeiling() && input.y > 0) {
                 yVelocity = -jump;
-                am.Play("Jump");
+                audioManager.Play("Jump");
             }
             else {
                 yVelocity = rb.velocity.y;

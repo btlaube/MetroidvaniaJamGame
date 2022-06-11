@@ -31,37 +31,7 @@ public class AudioManager : MonoBehaviour
             s.source.loop = s.loop;
         }
     }
-/*
-    void Start() {
-        UpdateSFXVolume(PlayerPrefs.GetFloat("SFXVolume"));
-        UpdateMusicVolume(PlayerPrefs.GetFloat("musicVolume"));
-        Play("MainTheme");
-    }
-
-    public void UpdateSFXVolume(float value) {
-        string[] soundList = new string[]{"ElevatorDing", "Click", "ElevatorOpen", "PageTurn", "Dialogue", "Steven"};
-        UpdateVolume(soundList, value);
-    }
-
-    public void UpdateMusicVolume(float value) {
-        Sound s = Array.Find(sounds, sound => sound.name == "MainTheme");
-        if (s == null)
-            Debug.Log("No such audio clip");
-        s.source.volume = value;
-    }
-
-    private void UpdateVolume(string[] soundList, float value) {
-        foreach (string x in soundList) {
-            Sound s = Array.Find(sounds, sound => sound.name == x);
-            if (s == null)
-                Debug.Log("No such audio clip");
-            else {
-                s.source.volume = value;
-            }
-        }
-        
-    }
-*/
+    
     public void Play(string name) {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)

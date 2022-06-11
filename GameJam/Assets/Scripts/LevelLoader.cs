@@ -23,12 +23,16 @@ public class LevelLoader : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public void LoadMainMenu() {
+        StartCoroutine(LoadLevel(0));
+    }
+
     public void LoadGameScene() {
         StartCoroutine(LoadLevel(1));
     }
 
-    public void LoadMainMenu() {
-        StartCoroutine(LoadLevel(0));
+    public void LoadIntroCutscene() {
+        StartCoroutine(LoadLevel(2));
     }
 
     IEnumerator LoadLevel(int levelIndex) {
@@ -44,6 +48,9 @@ public class LevelLoader : MonoBehaviour
                 break;
             case 1:
                 canvasGroup.GetComponent<CanvasGroupScript>().LoadGameScene();
+                break;
+            case 2:
+                canvasGroup.GetComponent<CanvasGroupScript>().LoadIntroCutscene();
                 break;
         }
         transition.SetTrigger("End");

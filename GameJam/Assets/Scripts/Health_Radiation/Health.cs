@@ -4,8 +4,8 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private float startingHealth;
     public float currentHealth {get; private set;}
-    public AudioManager am;
 
+    private AudioManager audioManager;
     private Animator animator;
     private bool dead;
     [SerializeField] private Behaviour[] components;
@@ -13,17 +13,18 @@ public class Health : MonoBehaviour
     private void Awake() {
         currentHealth = 0;
         animator = GetComponent<Animator>();
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 
     public void TakeDamage(float damage) {
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, startingHealth);
 
         if(currentHealth > 0) {
-            am.Play("PlayerHit");
+            audioManager.Play("PlayerHit");
         }
         else {
             if(!dead) {
-                am.Play("PlayerDie");
+                audioManager.Play("PlayerDie");
                 animator.SetTrigger("Die");
 
                 GetComponent<Collider2D>().enabled = false;

@@ -32,4 +32,11 @@ public class CanvasGroupScript : MonoBehaviour
         transform.GetChild(1).gameObject.SetActive(true);
     }
 
+    public void LoadIntroCutscene() {
+        foreach(Transform canvas in transform) {
+            canvas.gameObject.SetActive(false);
+        }
+        transform.GetChild(2).gameObject.SetActive(true);
+    }
+
 }

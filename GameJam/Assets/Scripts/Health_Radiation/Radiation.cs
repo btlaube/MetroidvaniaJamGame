@@ -5,29 +5,31 @@ public class Radiation : MonoBehaviour
     [SerializeField] private float startingRadiation;
     public float maxRadiation;
     public float currentRadiation {get; private set;}
-    public AudioManager am;
-    public Camera myCamera;
 
+    private Camera myCamera;
+    private AudioManager audioManager;
     private Animator animator;
     private bool dead;
 
     private void Awake() {
         currentRadiation = 0;
         animator = GetComponent<Animator>();
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        myCamera = Camera.main;
     }
 
     public void AddRadiation(float radiation) {
         currentRadiation = Mathf.Clamp(currentRadiation + radiation, startingRadiation, maxRadiation);
 
         if(currentRadiation < maxRadiation) {
-            am.Play("PlayerHit");
+            audioManager.Play("PlayerHit");
             animator.SetTrigger("Hit");
             StartCoroutine(myCamera.GetComponent<CameraShake>().Shake(0.2f, 0.2f));
         }
         else {
             if(!dead) {
                 StartCoroutine(myCamera.GetComponent<CameraShake>().Shake(0.2f, 0.2f));
-                am.Play("PlayerDie");
+                audioManager.Play("PlayerDie");
                 animator.SetTrigger("Die");
                 GetComponent<NewPlayerMovement>().enabled = false;
                 dead = true;

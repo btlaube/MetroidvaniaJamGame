@@ -25,8 +25,14 @@ public class CameraFollow : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    void Update() {
+        if(SceneManager.GetActiveScene().buildIndex == 1) {
+            camTarget = GameObject.Find("Player").transform;
+        }
+    }
+
     void FixedUpdate() {
-        if (camTarget != null && SceneManager.GetActiveScene().buildIndex != 0) {
+        if (camTarget != null && SceneManager.GetActiveScene().buildIndex != 0 && SceneManager.GetActiveScene().buildIndex != 2) {
             var newPos = Vector2.Lerp(transform.position, camTarget.position, Time.deltaTime * trackingSpeed);
             var camPosition = new Vector3(newPos.x, newPos.y, -10f);
             var v3 = camPosition;

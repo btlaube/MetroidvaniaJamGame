@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     public float attackRecoil;
-    public AudioManager am;
+    public AudioManager audioManager;
 
     private Animator animator;
     private Rigidbody2D rb;
@@ -15,10 +15,10 @@ public class PlayerAttack : MonoBehaviour
     void Awake() {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 
-    void Update()
-    {
+    void Update() {
         input.x = Input.GetAxis("Fire1");
         if((Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)) && !isAttacking) {
             Attack();
@@ -27,7 +27,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void Attack() {
         transform.GetChild(0).gameObject.SetActive(true);
-        am.Play("Attack");
+        audioManager.Play("Attack");
         isAttacking = true;
         animator.SetBool("IsAttacking", true);
         animator.SetTrigger("Attack");
