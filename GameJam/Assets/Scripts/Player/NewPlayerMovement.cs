@@ -19,6 +19,8 @@ public class NewPlayerMovement : MonoBehaviour
     public float jump = 14f;
     public AudioManager am;
 
+    public static NewPlayerMovement instance;
+
     private Vector2 input;
     private SpriteRenderer sr;
     private Rigidbody2D rb;
@@ -39,6 +41,16 @@ public class NewPlayerMovement : MonoBehaviour
         height = GetComponent<Collider2D>().bounds.extents.y + 0.001f;
         widthOffset = GetComponent<Collider2D>().offset.x;
         heightOffset = GetComponent<Collider2D>().offset.y;
+
+        if (instance == null) {
+            instance = this;
+        }
+        else {
+            Destroy(gameObject);
+            return;
+        }
+        
+        DontDestroyOnLoad(gameObject);
     }
 
     void Update() {   
