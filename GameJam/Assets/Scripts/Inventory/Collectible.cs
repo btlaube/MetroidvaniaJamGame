@@ -8,10 +8,16 @@ public class Collectible : MonoBehaviour
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 
-    void OnCollisionEnter2D(Collision2D other) {
+    void OnCollisionEnter2D(Collision2D other) {        
         if(other.gameObject.tag == "Player") {
+            PickUp();
             audioManager.Play("DnaCollect");
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
+    }
+
+    void PickUp() {
+        Debug.Log("Picking Up item");
+        //Add item to inventory
     }
 }
