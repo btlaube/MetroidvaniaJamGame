@@ -48,7 +48,12 @@ public class Inventory : MonoBehaviour
     }
 
     public void Remove(Item item) {
-        items.Remove(item);
+        if(item.runtimeItemAmount > 1) {
+            item.runtimeItemAmount--;
+        }
+        else {
+            items.Remove(item);
+        }
 
         if(onItemChangedCallback != null)
             onItemChangedCallback.Invoke();

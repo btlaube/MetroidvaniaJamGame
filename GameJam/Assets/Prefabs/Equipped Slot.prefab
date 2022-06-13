@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2410766610889539310}
+  - component: {fileID: 5453857729022830626}
   m_Layer: 0
   m_Name: Equipped Slot
   m_TagString: Untagged
@@ -37,6 +38,19 @@ RectTransform:
   m_AnchoredPosition: {x: 15.625, y: -15.625}
   m_SizeDelta: {x: 68.75, y: 68.75}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &5453857729022830626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2675439670114923175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e25cee0fe91077b42bcc30ab9b26d09b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 600307090472402081}
 --- !u!1 &9100263696168833937
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,7 +163,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 600307090472402081}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5453857729022830626}
+        m_TargetAssemblyTypeName: EquipmentSlotUI, Assembly-CSharp
+        m_MethodName: UnequipItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &4958968277046439391
 CanvasRenderer:
   m_ObjectHideFlags: 0

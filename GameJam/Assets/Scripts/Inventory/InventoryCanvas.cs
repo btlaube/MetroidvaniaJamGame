@@ -35,6 +35,7 @@ public class InventoryCanvas : MonoBehaviour
             }
             else {
                 slots[i].ClearSlot();
+                slots[i].itemAmountText.enabled = false;
             }
         }
     }

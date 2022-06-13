@@ -10,8 +10,10 @@ public class Item : ScriptableObject, ISerializationCallbackReceiver
     public int initialItemAmount = 1;
     public int runtimeItemAmount = 1;
 
-    public virtual void Use() {
-        Debug.Log("Using " + name);
+    public virtual void Use() {}
+
+    public void RemoveFromInventory() {
+        Inventory.instance.Remove(this);
     }
 
     public void OnAfterDeserialize() {
