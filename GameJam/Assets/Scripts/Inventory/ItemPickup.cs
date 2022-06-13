@@ -4,9 +4,12 @@ public class ItemPickup : MonoBehaviour
 {
     public Item item;
 
+    [SerializeField] private SpriteRenderer spriteRenderer;
     private AudioManager audioManager;
 
     void Awake() {
+        spriteRenderer.sprite = item.icon;
+
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 
