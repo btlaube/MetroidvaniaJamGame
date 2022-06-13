@@ -6,7 +6,7 @@ public class CanvasGroupScript : MonoBehaviour
 {
     public static CanvasGroupScript instance;
 
-    private bool inventoryOpen;
+    //private bool inventoryOpen;
     private AudioManager audioManager;
 
     void Awake() {
@@ -23,17 +23,17 @@ public class CanvasGroupScript : MonoBehaviour
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 
-    void Update() {
-        if(Input.GetKeyUp(KeyCode.P)) {
-            audioManager.Play("DnaCollect");
-            if(inventoryOpen) {
-                HideInventory();
-            }
-            else {
-                ShowInventory();
-            }
-        }
-    }
+    //void Update() {
+    //    if(Input.GetKeyUp(KeyCode.P)) {
+    //        audioManager.Play("DnaCollect");
+    //        if(inventoryOpen) {
+    //            HideInventory();
+    //        }
+    //        else {
+    //            ShowInventory();
+    //        }
+    //    }
+    //}
 
     public void LoadMainMenu() {
         foreach(Transform canvas in transform) {
@@ -47,6 +47,7 @@ public class CanvasGroupScript : MonoBehaviour
             canvas.gameObject.SetActive(false);
         }
         transform.GetChild(1).gameObject.SetActive(true);
+        transform.GetChild(3).gameObject.SetActive(true);
     }
 
     public void LoadIntroCutscene() {
@@ -56,13 +57,13 @@ public class CanvasGroupScript : MonoBehaviour
         transform.GetChild(2).gameObject.SetActive(true);
     }
 
-    public void ShowInventory() {
-        inventoryOpen = true;
-        transform.GetChild(3).gameObject.SetActive(true);
-    }
-
-    public void HideInventory() {
-        inventoryOpen = false;
-        transform.GetChild(3).gameObject.SetActive(false);
-    }
+    //public void ShowInventory() {
+    //    inventoryOpen = true;
+    //    transform.GetChild(3).gameObject.SetActive(true);
+    //}
+//
+    //public void HideInventory() {
+    //    inventoryOpen = false;
+    //    transform.GetChild(3).gameObject.SetActive(false);
+    //}
 }

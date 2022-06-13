@@ -34,7 +34,12 @@ public class Inventory : MonoBehaviour
             return false;
         }
 
-        items.Add(item);
+        if(items.Contains(item)) {
+            item.runtimeItemAmount++;
+        }
+        else {
+            items.Add(item);
+        }
         
         if(onItemChangedCallback != null)
             onItemChangedCallback.Invoke();

@@ -45,147 +45,147 @@ public class NewPlayerMovement : MonoBehaviour
 
     void Update() {
         //if(!(GetComponent<Player>().isTakingDamage)) {
-            input.x = Input.GetAxis("Horizontal");
-            input.y = Input.GetAxis("Jump");
+        input.x = Input.GetAxis("Horizontal");
+        input.y = Input.GetAxis("Jump");
 
-            animator.SetFloat("Speed", Mathf.Abs(input.x));
-            
-            if (input.x > 0.1f) {
-                sr.flipX = false;
-            }
-            else if (input.x < -0.1f) {
-                sr.flipX = true;
-            }
+        animator.SetFloat("Speed", Mathf.Abs(input.x));
+        
+        if (input.x > 0.1f) {
+            sr.flipX = false;
+        }
+        else if (input.x < -0.1f) {
+            sr.flipX = true;
+        }
 
-            if (input.y >= 1f && jumpDuration < jumpDurationThreshold) {
-                jumpDuration += Time.deltaTime;
-                animator.SetBool("IsJumping", true);
-            }
-            else if(input.y < 1) {
-                isJumping = false;
-                animator.SetBool("IsJumping", false);
-                jumpDuration = 0f;
-            }
+        if (input.y >= 1f && jumpDuration < jumpDurationThreshold) {
+            jumpDuration += Time.deltaTime;
+            animator.SetBool("IsJumping", true);
+        }
+        else if(input.y < 1) {
+            isJumping = false;
+            animator.SetBool("IsJumping", false);
+            jumpDuration = 0f;
+        }
 
-            if(!PlayerIsOnCeiling() && !PlayerIsOnGround() && !PlayerIsOnWall() && !isJumping) {
-                animator.SetBool("IsFalling", true);
+        if(!PlayerIsOnCeiling() && !PlayerIsOnGround() && !PlayerIsOnWall() && !isJumping) {
+            animator.SetBool("IsFalling", true);
+        }
+        else {
+            animator.SetBool("IsFalling", false);
+        }
+
+        if (PlayerIsOnGround() && isJumping == false) {
+            if (input.y > 0f) {
+                isJumping = true;
+            }
+            animator.SetBool("IsOnWall", false);
+        }
+
+        //Control gravity for wall slide
+        if(gecko) {
+            if(PlayerIsOnWall() && !PlayerIsOnGround()) {
+                rb.gravityScale = 0.1f;
+                if (GetWallDirection() == -1) {
+                    sr.flipX = false;
+                }
+                else if (GetWallDirection() == 1) {
+                    sr.flipX = true;
+                }
             }
             else {
-                animator.SetBool("IsFalling", false);
+                rb.gravityScale = 1f;
             }
+        }
+        
 
-            if (PlayerIsOnGround() && isJumping == false) {
-                if (input.y > 0f) {
-                    isJumping = true;
-                }
-                animator.SetBool("IsOnWall", false);
+        if (jumpDuration > jumpDurationThreshold) input.y = 0f;
+
+        //Control gravity for ceiling cling if Magnet is active
+        if(magnet) {
+            if(PlayerIsOnCeiling()) {
+                rb.gravityScale = 0f;
             }
-
-            //Control gravity for wall slide
-            if(gecko) {
-                if(PlayerIsOnWall() && !PlayerIsOnGround()) {
-                    rb.gravityScale = 0.1f;
-                    if (GetWallDirection() == -1) {
-                        sr.flipX = false;
-                    }
-                    else if (GetWallDirection() == 1) {
-                        sr.flipX = true;
-                    }
-                }
-                else {
-                    rb.gravityScale = 1f;
-                }
+            else if(!PlayerIsOnWall()){
+                rb.gravityScale = 1f;
             }
-            
-
-            if (jumpDuration > jumpDurationThreshold) input.y = 0f;
-
-            //Control gravity for ceiling cling if Magnet is active
-            if(magnet) {
-                if(PlayerIsOnCeiling()) {
-                    rb.gravityScale = 0f;
-                }
-                else if(!PlayerIsOnWall()){
-                    rb.gravityScale = 1f;
-                }
-            }
+        }
         //}        
     }
 
     void FixedUpdate() {
         //if(!(GetComponent<Player>().isTakingDamage)) {
-            var acceleration = 0f;
-            if (PlayerIsOnGround() || PlayerIsOnCeiling()) {
-                acceleration = accel;
-            }
-            else {
-                acceleration = airAccel;
-            }
+        var acceleration = 0f;
+        if (PlayerIsOnGround() || PlayerIsOnCeiling()) {
+            acceleration = accel;
+        }
+        else {
+            acceleration = airAccel;
+        }
 
-            var xVelocity = 0f;        
-            if (PlayerIsOnGround() && input.x == 0) {
-                xVelocity = 0f;
-            }
-            else {
-                xVelocity = rb.velocity.x;
-            }
+        var xVelocity = 0f;        
+        if (PlayerIsOnGround() && input.x == 0) {
+            xVelocity = 0f;
+        }
+        else {
+            xVelocity = rb.velocity.x;
+        }
 
-            var yVelocity = 0f;
-            if (PlayerIsOnGround() && input.y > 0) {
-                yVelocity = jump;
-                audioManager.Play("Jump");
-            }
-            else if(PlayerIsOnWall() && input.y > 0 && gecko) {
-                yVelocity = jump;
-                audioManager.Play("Jump");
-            }
-            else if(PlayerIsOnCeiling() && input.y > 0) {
-                yVelocity = -jump;
-                audioManager.Play("Jump");
-            }
-            else {
-                yVelocity = rb.velocity.y;
-            }
+        var yVelocity = 0f;
+        if (PlayerIsOnGround() && input.y > 0) {
+            yVelocity = jump;
+            audioManager.Play("Jump");
+        }
+        else if(PlayerIsOnWall() && input.y > 0 && gecko) {
+            yVelocity = jump;
+            audioManager.Play("Jump");
+        }
+        else if(PlayerIsOnCeiling() && input.y > 0) {
+            yVelocity = -jump;
+            audioManager.Play("Jump");
+        }
+        else {
+            yVelocity = rb.velocity.y;
+        }
 
-            //Controls movement on x-axis
-            //Prevents movement on x-axis depending on if player is on a wall to prevent player from clinging to wall
-            if(GetWallDirection() == -1) {
-                if(input.x > 0) {
-                    rb.AddForce(new Vector2(((input.x * speed) - rb.velocity.x) * acceleration, 0));
-                }
-            }
-            else if(GetWallDirection() == 1) {
-                if(input.x < 0) {
-                    rb.AddForce(new Vector2(((input.x * speed) - rb.velocity.x) * acceleration, 0));
-                }
-            }
-            else {
+        //Controls movement on x-axis
+        //Prevents movement on x-axis depending on if player is on a wall to prevent player from clinging to wall
+        if(GetWallDirection() == -1) {
+            if(input.x > 0) {
                 rb.AddForce(new Vector2(((input.x * speed) - rb.velocity.x) * acceleration, 0));
             }
-            
-            rb.velocity = new Vector2(xVelocity, yVelocity);
+        }
+        else if(GetWallDirection() == 1) {
+            if(input.x < 0) {
+                rb.AddForce(new Vector2(((input.x * speed) - rb.velocity.x) * acceleration, 0));
+            }
+        }
+        else {
+            rb.AddForce(new Vector2(((input.x * speed) - rb.velocity.x) * acceleration, 0));
+        }
+        
+        rb.velocity = new Vector2(xVelocity, yVelocity);
 
-            //Controls movement on x-axis for wall jumping
-            if(PlayerIsOnWall() && !PlayerIsOnGround() && input.y == 1 && gecko) {
-                rb.velocity = new Vector2(-GetWallDirection() * speed * 0.75f, rb.velocity.y);
-                animator.SetBool("IsOnWall", false);
-                animator.SetBool("IsJumping", true);
-            }
-            else if (!PlayerIsOnWall()) {
-                animator.SetBool("IsOnWall", false);
-                animator.SetBool("IsJumping", true);
-            }
-            if (PlayerIsOnWall() && !PlayerIsOnGround() && gecko) {
-                animator.SetBool("IsOnWall", true);
-            }
+        //Controls movement on x-axis for wall jumping
+        if(PlayerIsOnWall() && !PlayerIsOnGround() && input.y == 1 && gecko) {
+            rb.velocity = new Vector2(-GetWallDirection() * speed * 0.75f, rb.velocity.y);
+            animator.SetBool("IsOnWall", false);
+            animator.SetBool("IsJumping", true);
+        }
+        else if (!PlayerIsOnWall()) {
+            animator.SetBool("IsOnWall", false);
+            animator.SetBool("IsJumping", true);
+        }
+        if (PlayerIsOnWall() && !PlayerIsOnGround() && gecko) {
+            animator.SetBool("IsOnWall", true);
+        }
 
-            if (isJumping && jumpDuration < jumpDurationThreshold) {
-                rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
-            }
-            else {
-                isJumping = false;
-                animator.SetBool("IsJumping", false);
-            }
+        if (isJumping && jumpDuration < jumpDurationThreshold) {
+            rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+        }
+        else {
+            isJumping = false;
+            animator.SetBool("IsJumping", false);
+        }
         //}        
     }
 
