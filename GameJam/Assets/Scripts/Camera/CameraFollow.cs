@@ -5,13 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform camTarget;
     public float trackingSpeed;
     public float minX;
     public float minY;
     public float maxX;
     public float maxY;
     public static CameraFollow instance;
+
+    private Transform camTarget;
 
     void Awake() {
         if (instance == null) {
@@ -26,7 +27,7 @@ public class CameraFollow : MonoBehaviour
     }
 
     void Update() {
-        if(SceneManager.GetActiveScene().buildIndex == 1) {
+        if(SceneManager.GetActiveScene().buildIndex != 0 && SceneManager.GetActiveScene().buildIndex != 2) {
             camTarget = GameObject.Find("Player").transform;
         }
     }
