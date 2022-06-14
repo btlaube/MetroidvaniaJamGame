@@ -8,7 +8,6 @@ public class EquipmentSlot : MonoBehaviour
     Equipment equipment;
 
     public void EquipItem(Equipment newEquipment) {
-        Debug.Log("equip item");
         equipment = newEquipment;
 
         icon.sprite = equipment.icon;
