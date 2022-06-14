@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Guardian(Start).unity
     guid: a723582dc3022324daf5c19e83a5402c
+  - enabled: 1
+    path: Assets/Scenes/Phoenix_01(SFM).unity
+    guid: 3d20121cafe1a624bbfc37a40829226c
   m_configObjects: {}

@@ -16,29 +16,16 @@ public class DialogueManager : MonoBehaviour
 
     AudioManager audioManager;
 
-    void Awake() {
-        //Debug.Log(SceneManager.GetActiveScene().buildIndex);
-        //if(SceneManager.GetActiveScene().buildIndex == 2) {
-        //    Debug.Log("called");
-        //    AiAnimator = GameObject.Find("AI").GetComponent<Animator>();
-        //    playerMovement = GameObject.Find("Player").GetComponent<NewPlayerMovement>();
-        //}
-    }
-
     void Start() {
         sentences = new Queue<string>();
-
-        //if(SceneManager.GetActiveScene().buildIndex == 2) {
-            //AiAnimator = GameObject.Find("AI").GetComponent<Animator>();
-            //playerMovement = GameObject.Find("Player").GetComponent<NewPlayerMovement>();
-        //}
-
         audioManager = AudioManager.instance;
     }
 
     void Update() {
-        AiAnimator = GameObject.Find("AI").GetComponent<Animator>();
-        playerMovement = GameObject.Find("Player").GetComponent<NewPlayerMovement>();
+        if(SceneManager.GetActiveScene().buildIndex == 2) {
+            AiAnimator = GameObject.Find("AI").GetComponent<Animator>();
+            playerMovement = GameObject.Find("Player").GetComponent<NewPlayerMovement>();
+        }        
         if(Input.GetKeyUp(KeyCode.Return)) {
             DisplayNextSentence();
         }

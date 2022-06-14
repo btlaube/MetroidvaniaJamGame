@@ -57,6 +57,14 @@ public class CanvasGroupScript : MonoBehaviour
         transform.GetChild(4).gameObject.SetActive(true);
     }
     
+    public void ShowSFM() {
+        transform.GetChild(5).gameObject.SetActive(true);
+    }
+
+    public void HideSFM() {
+        transform.GetChild(5).gameObject.SetActive(false);
+    }
+
     //public void ShowInventory() {
     //    inventoryOpen = true;
     //    transform.GetChild(3).gameObject.SetActive(true);
