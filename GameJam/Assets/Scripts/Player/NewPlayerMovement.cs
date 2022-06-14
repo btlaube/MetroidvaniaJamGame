@@ -12,7 +12,6 @@ public class NewPlayerMovement : MonoBehaviour
     public float airAccel = 3f;
     public float jump = 14f;
 
-    private AudioManager audioManager;
     private Vector2 input;
     private SpriteRenderer sr;
     private Rigidbody2D rb;
@@ -26,16 +25,16 @@ public class NewPlayerMovement : MonoBehaviour
     private bool isJumping;
     private bool isFalling;
 
-    [SerializeField]
-    private bool gecko;
-    [SerializeField]
-    private bool magnet;
+    [SerializeField] private bool gecko;
+    [SerializeField] private bool magnet;
+
+    AudioManager audioManager;
+    EquippedInventory equippedInventory;
 
     void Awake() {
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
 
         width = GetComponent<Collider2D>().bounds.extents.x + 0.001f;
         height = GetComponent<Collider2D>().bounds.extents.y + 0.001f;
@@ -43,8 +42,28 @@ public class NewPlayerMovement : MonoBehaviour
         heightOffset = GetComponent<Collider2D>().offset.y;        
     }
 
+    void Start() {
+        audioManager = AudioManager.instance;
+        equippedInventory = EquippedInventory.instance;
+    }
+
     void Update() {
-        //if(!(GetComponent<Player>().isTakingDamage)) {
+        Equipment batSyringe = equippedInventory.currentEquipment.Find(equipment => equipment.name == "Bat Syringe");
+        if(batSyringe) {
+            magnet = true;
+        }
+        else {
+            magnet = false;
+        }
+
+        Equipment geckoSyringe = equippedInventory.currentEquipment.Find(equipment => equipment.name == "Gecko Syringe");
+        if(geckoSyringe) {
+            gecko = true;
+        }
+        else {
+            gecko = false;
+        }
+
         input.x = Input.GetAxis("Horizontal");
         input.y = Input.GetAxis("Jump");
 
@@ -108,12 +127,10 @@ public class NewPlayerMovement : MonoBehaviour
             else if(!PlayerIsOnWall()){
                 rb.gravityScale = 1f;
             }
-        }
-        //}        
+        }     
     }
 
     void FixedUpdate() {
-        //if(!(GetComponent<Player>().isTakingDamage)) {
         var acceleration = 0f;
         if (PlayerIsOnGround() || PlayerIsOnCeiling()) {
             acceleration = accel;
@@ -186,11 +203,9 @@ public class NewPlayerMovement : MonoBehaviour
             isJumping = false;
             animator.SetBool("IsJumping", false);
         }
-        //}        
     }
 
-    public bool PlayerIsOnGround() {
-        
+    public bool PlayerIsOnGround() {        
         bool groundCheck1 = Physics2D.Raycast(new Vector2(transform.position.x + widthOffset, transform.position.y - height + heightOffset), -Vector2.up, rayCastLengthCheck);
         bool groundCheck2 = Physics2D.Raycast(new Vector2(transform.position.x + (width - 0.2f) + widthOffset, transform.position.y - height + heightOffset), -Vector2.up, rayCastLengthCheck);
         bool groundCheck3 = Physics2D.Raycast(new Vector2( transform.position.x - (width - 0.2f), transform.position.y - height + heightOffset), -Vector2.up, rayCastLengthCheck);
@@ -203,8 +218,7 @@ public class NewPlayerMovement : MonoBehaviour
         }
     }
 
-    public bool PlayerIsOnWall() {
-        
+    public bool PlayerIsOnWall() {        
         bool wallOnleft = Physics2D.Raycast(new Vector2(transform.position.x - width + widthOffset, transform.position.y + heightOffset), -Vector2.right, rayCastLengthCheck);
         bool wallOnRight = Physics2D.Raycast(new Vector2(transform.position.x + width + widthOffset, transform.position.y + heightOffset), Vector2.right, rayCastLengthCheck);
         
