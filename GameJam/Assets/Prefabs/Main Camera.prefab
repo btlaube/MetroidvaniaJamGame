@@ -119,12 +119,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ac92f30acf941a40a817eddd87e7407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camTarget: {fileID: 0}
-  trackingSpeed: 2.5
+  trackingSpeed: 5
   minX: -100
   minY: -100
   maxX: 100
   maxY: 100
+  camTarget: {fileID: 0}
 --- !u!114 &6335020555097547423
 MonoBehaviour:
   m_ObjectHideFlags: 0

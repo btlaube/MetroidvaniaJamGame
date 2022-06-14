@@ -12,7 +12,7 @@ public class CameraFollow : MonoBehaviour
     public float maxY;
     public static CameraFollow instance;
 
-    private Transform camTarget;
+    [SerializeField] private Transform camTarget;
 
     void Awake() {
         if (instance == null) {
@@ -27,14 +27,14 @@ public class CameraFollow : MonoBehaviour
     }
 
     void Update() {
-        if(SceneManager.GetActiveScene().buildIndex != 0 && SceneManager.GetActiveScene().buildIndex != 2) {
+        if(SceneManager.GetActiveScene().buildIndex >= 2) {
             camTarget = GameObject.Find("Player").transform;
         }
     }
 
     void FixedUpdate() {
-        if (camTarget != null && SceneManager.GetActiveScene().buildIndex != 0 && SceneManager.GetActiveScene().buildIndex != 2) {
-            var newPos = Vector2.Lerp(transform.position, camTarget.position, Time.deltaTime * trackingSpeed);
+        if (camTarget != null) {
+            var newPos = Vector2.Lerp(transform.position, new Vector2(camTarget.position.x, camTarget.position.y + 2f), Time.deltaTime * trackingSpeed);
             var camPosition = new Vector3(newPos.x, newPos.y, -10f);
             var v3 = camPosition;
             var clampX = Mathf.Clamp(v3.x, minX, maxX);

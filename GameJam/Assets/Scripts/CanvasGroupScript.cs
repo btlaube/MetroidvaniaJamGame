@@ -6,7 +6,6 @@ public class CanvasGroupScript : MonoBehaviour
 {
     public static CanvasGroupScript instance;
 
-    //private bool inventoryOpen;
     private AudioManager audioManager;
 
     void Awake() {
@@ -42,21 +41,21 @@ public class CanvasGroupScript : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(true);
     }
 
-    public void LoadGameScene() {
-        foreach(Transform canvas in transform) {
-            canvas.gameObject.SetActive(false);
-        }
-        transform.GetChild(1).gameObject.SetActive(true);
-        transform.GetChild(3).gameObject.SetActive(true);
-    }
-
     public void LoadIntroCutscene() {
         foreach(Transform canvas in transform) {
             canvas.gameObject.SetActive(false);
         }
-        transform.GetChild(2).gameObject.SetActive(true);
+        transform.GetChild(1).gameObject.SetActive(true);
     }
 
+    public void LoadGameScene() {
+        foreach(Transform canvas in transform) {
+            canvas.gameObject.SetActive(false);
+        }
+        transform.GetChild(2).gameObject.SetActive(true);
+        transform.GetChild(3).gameObject.SetActive(true);
+    }
+    
     //public void ShowInventory() {
     //    inventoryOpen = true;
     //    transform.GetChild(3).gameObject.SetActive(true);

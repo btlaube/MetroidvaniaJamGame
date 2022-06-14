@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2730659c158ba9a45b4c5f01351e8b1b
+guid: a6f6b41b9e3129f498acdf17546bd6e1
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -126,70 +126,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: Big_AI_Sprites_0
-      rect:
-        serializedVersion: 2
-        x: 29
-        y: 3
-        width: 37
-        height: 27
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3f4e9069c0c03c444967cbe3f0529d0f
-      internalID: -457419008
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Big_AI_Sprites_1
-      rect:
-        serializedVersion: 2
-        x: 93
-        y: 3
-        width: 37
-        height: 27
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6c92b6f85b261b94bab7b25906ad1d3a
-      internalID: 1118765092
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Big_AI_Sprites_2
-      rect:
-        serializedVersion: 2
-        x: 157
-        y: 3
-        width: 37
-        height: 27
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 395349f56ccbb064b91a9eca3e990ebe
-      internalID: -891883059
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -200,11 +137,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Big_AI_Sprites_0: -457419008
-      Big_AI_Sprites_1: 1118765092
-      Big_AI_Sprites_3: 42194582
-      Big_AI_Sprites_2: -891883059
+    nameFileIdTable: {}
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

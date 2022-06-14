@@ -13,7 +13,7 @@ public class RadiationBar : MonoBehaviour
     //}
 
     void Update() {
-        if(SceneManager.GetActiveScene().buildIndex == 1) {
+        if(SceneManager.GetActiveScene().buildIndex >= 2) {
             playerRadiation = GameObject.Find("Player").GetComponent<Radiation>();
         }
         if(playerRadiation) {

@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 1144036342625684293}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 768752015, guid: 5ab15e66ab92e5d41908cce91f2c657c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -152,13 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   accel: 6
-  isJumping: 0
-  isFalling: 0
   jumpSpeed: 8
-  width: 0
-  height: 0
-  widthOffset: 0
-  heightOffset: 0
   jumpDurationThreshold: 0.25
   airAccel: 3
   jump: 14

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2730659c158ba9a45b4c5f01351e8b1b
+guid: c3c5bf2814ece0a4997736a99734ce72
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -128,64 +128,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Big_AI_Sprites_0
+      name: Long_Table_0
       rect:
         serializedVersion: 2
-        x: 29
-        y: 3
-        width: 37
-        height: 27
+        x: 0
+        y: 0
+        width: 64
+        height: 19
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f4e9069c0c03c444967cbe3f0529d0f
-      internalID: -457419008
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Big_AI_Sprites_1
-      rect:
-        serializedVersion: 2
-        x: 93
-        y: 3
-        width: 37
-        height: 27
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6c92b6f85b261b94bab7b25906ad1d3a
-      internalID: 1118765092
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Big_AI_Sprites_2
-      rect:
-        serializedVersion: 2
-        x: 157
-        y: 3
-        width: 37
-        height: 27
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 395349f56ccbb064b91a9eca3e990ebe
-      internalID: -891883059
+      spriteID: 5c9ce0b87d42a7b409088e4e4360e14a
+      internalID: 1736315970
       vertices: []
       indices: 
       edges: []
@@ -201,10 +159,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Big_AI_Sprites_0: -457419008
-      Big_AI_Sprites_1: 1118765092
-      Big_AI_Sprites_3: 42194582
-      Big_AI_Sprites_2: -891883059
+      Long_Table_0: 1736315970
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

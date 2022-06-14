@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2730659c158ba9a45b4c5f01351e8b1b
+guid: ce51b0050f372904cbaba9e733535cdf
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -128,64 +128,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Big_AI_Sprites_0
+      name: Reactor_Core_Sprites_0
       rect:
         serializedVersion: 2
-        x: 29
-        y: 3
-        width: 37
-        height: 27
+        x: 0
+        y: 0
+        width: 32
+        height: 36
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f4e9069c0c03c444967cbe3f0529d0f
-      internalID: -457419008
+      spriteID: 6b90fdec5d9bb9c4ca12b4e01fc26cd6
+      internalID: 211915158
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Big_AI_Sprites_1
+      name: Reactor_Core_Sprites_1
       rect:
         serializedVersion: 2
-        x: 93
-        y: 3
-        width: 37
-        height: 27
+        x: 32
+        y: 0
+        width: 32
+        height: 44
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6c92b6f85b261b94bab7b25906ad1d3a
-      internalID: 1118765092
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Big_AI_Sprites_2
-      rect:
-        serializedVersion: 2
-        x: 157
-        y: 3
-        width: 37
-        height: 27
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 395349f56ccbb064b91a9eca3e990ebe
-      internalID: -891883059
+      spriteID: 7cd44f9fd932acf449e9f00990262581
+      internalID: -1546769125
       vertices: []
       indices: 
       edges: []
@@ -201,10 +180,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Big_AI_Sprites_0: -457419008
-      Big_AI_Sprites_1: 1118765092
-      Big_AI_Sprites_3: 42194582
-      Big_AI_Sprites_2: -891883059
+      Reactor_Core_Sprites_1: -1546769125
+      Reactor_Core_Sprites_0: 211915158
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
