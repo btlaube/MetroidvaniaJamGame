@@ -7,14 +7,19 @@ public class Cutscene : MonoBehaviour
 {
     public Text textElement;
     public string cutsceneText;
-    public LevelLoader levelLoader;
 
     private AudioManager audioManager;
     private bool fullText = false;
+
+    LevelLoader levelLoader;
     
     public void OnEnable() {
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         ShowText();
+    }
+
+    void Awake() {
+        levelLoader = LevelLoader.instance;
     }
 
     void Update() {

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ce51b0050f372904cbaba9e733535cdf
+guid: 291faf62e28a17b459591dc2ce78f6f1
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -128,43 +128,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Reactor_Core_Sprites_0
+      name: PlaceCore_Bar_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 32
-        height: 44
+        x: 22
+        y: 14
+        width: 52
+        height: 9
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b90fdec5d9bb9c4ca12b4e01fc26cd6
-      internalID: 211915158
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Reactor_Core_Sprites_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 44
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7cd44f9fd932acf449e9f00990262581
-      internalID: -1546769125
+      spriteID: 05724f04d4f0ebd409f737f61003d004
+      internalID: -1201225452
       vertices: []
       indices: 
       edges: []
@@ -180,8 +159,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Reactor_Core_Sprites_1: -1546769125
-      Reactor_Core_Sprites_0: 211915158
+      PlaceCore_Bar_0: -1201225452
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

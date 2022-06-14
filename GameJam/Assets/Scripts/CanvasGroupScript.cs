@@ -54,6 +54,7 @@ public class CanvasGroupScript : MonoBehaviour
         }
         transform.GetChild(2).gameObject.SetActive(true);
         transform.GetChild(3).gameObject.SetActive(true);
+        transform.GetChild(4).gameObject.SetActive(true);
     }
     
     //public void ShowInventory() {
