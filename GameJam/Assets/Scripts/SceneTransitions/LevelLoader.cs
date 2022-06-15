@@ -9,6 +9,7 @@ public class LevelLoader : MonoBehaviour
     public Animator transition;
     public GameObject canvasGroup;
 
+    [SerializeField] private SceneManagerScript sceneManager;
     [SerializeField] private float transitionTime = 1f;
 
     void Awake() {
@@ -35,7 +36,11 @@ public class LevelLoader : MonoBehaviour
         StartCoroutine(LoadLevel(2));
     }
 
-    IEnumerator LoadLevel(int levelIndex) {
+    public void LoadScene(int sceneToLoad, int spawnerIndex) {
+        StartCoroutine(LoadLevel(sceneToLoad, spawnerIndex));
+    }
+
+    IEnumerator LoadLevel(int levelIndex, int spawnerIndex = 0) {
         transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(transitionTime);
@@ -50,7 +55,10 @@ public class LevelLoader : MonoBehaviour
                 canvasGroup.GetComponent<CanvasGroupScript>().LoadIntroCutscene();
                 break;
             case 2:
+            case 3:
                 canvasGroup.GetComponent<CanvasGroupScript>().LoadGameScene();
+                sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManagerScript>();
+                sceneManager.SetPlayerLocation(spawnerIndex);
                 break;
         }
         transition.SetTrigger("End");

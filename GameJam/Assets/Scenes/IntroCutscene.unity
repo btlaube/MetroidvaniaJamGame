@@ -283,6 +283,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas Group
       objectReference: {fileID: 0}
+    - target: {fileID: 5016125778084563139, guid: 78889332bf7449b4fa024af9bc360294, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7171932624060588710, guid: 78889332bf7449b4fa024af9bc360294, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78889332bf7449b4fa024af9bc360294, type: 3}
 --- !u!1 &1168835940
