@@ -16,8 +16,5 @@ public class Collectible : MonoBehaviour
         }
     }
 
-    void PickUp() {
-        Debug.Log("Picking Up item");
-        //Add item to inventory
-    }
+    void PickUp() {}
 }

@@ -7,9 +7,8 @@ public class LevelLoader : MonoBehaviour
 {
     public static LevelLoader instance;
     public Animator transition;
-    public GameObject canvasGroup;
+    public CanvasGroupScript canvasGroup;
 
-    [SerializeField] private SceneManagerScript sceneManager;
     [SerializeField] private float transitionTime = 1f;
 
     void Awake() {
@@ -24,6 +23,10 @@ public class LevelLoader : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    void Start() {
+        canvasGroup = CanvasGroupScript.instance;
+    }
+
     public void LoadMainMenu() {
         StartCoroutine(LoadLevel(0));
     }
@@ -36,11 +39,11 @@ public class LevelLoader : MonoBehaviour
         StartCoroutine(LoadLevel(2));
     }
 
-    public void LoadScene(int sceneToLoad, int spawnerIndex) {
-        StartCoroutine(LoadLevel(sceneToLoad, spawnerIndex));
+    public void LoadScene(int sceneToLoad) {
+        StartCoroutine(LoadLevel(sceneToLoad));
     }
 
-    IEnumerator LoadLevel(int levelIndex, int spawnerIndex = 0) {
+    IEnumerator LoadLevel(int levelIndex) {
         transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(transitionTime);
@@ -49,16 +52,14 @@ public class LevelLoader : MonoBehaviour
 
         switch(levelIndex) {
             case 0:
-                canvasGroup.GetComponent<CanvasGroupScript>().LoadMainMenu();
+                canvasGroup.LoadMainMenu();
                 break;
             case 1:
-                canvasGroup.GetComponent<CanvasGroupScript>().LoadIntroCutscene();
+                canvasGroup.LoadIntroCutscene();
                 break;
             case 2:
             case 3:
-                canvasGroup.GetComponent<CanvasGroupScript>().LoadGameScene();
-                sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManagerScript>();
-                sceneManager.SetPlayerLocation(spawnerIndex);
+                canvasGroup.LoadGameScene();
                 break;
         }
         transition.SetTrigger("End");

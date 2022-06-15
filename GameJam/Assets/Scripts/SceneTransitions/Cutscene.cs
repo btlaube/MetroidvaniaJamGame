@@ -56,6 +56,6 @@ public class Cutscene : MonoBehaviour
     void EndCutscene() {
         fullText = false;
         audioManager.Stop("Typing");
-        levelLoader.GetComponent<LevelLoader>().LoadScene(2, 0);
+        levelLoader.GetComponent<LevelLoader>().LoadScene(2);
     }
 }

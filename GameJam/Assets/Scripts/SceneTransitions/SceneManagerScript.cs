@@ -5,7 +5,7 @@ using UnityEngine;
 public class SceneManagerScript : MonoBehaviour
 {
     public SceneBounds screenBounds;
-    public PlayerSpawner[] playerSpawners;
+    public PlayerSpawner playerSpawner;
 
     [SerializeField] private Transform player;
 
@@ -21,9 +21,10 @@ public class SceneManagerScript : MonoBehaviour
         camera.minY = screenBounds.minY;
         camera.maxX = screenBounds.maxX;
         camera.maxY = screenBounds.maxY;
+        SetPlayerLocation();
     }
 
-    public void SetPlayerLocation(int spawnerIndex) {
-        player.position = playerSpawners[spawnerIndex].spawnLocation;
+    public void SetPlayerLocation() {
+        player.position = playerSpawner.runtimeSpawnLocation;
     }
 }
