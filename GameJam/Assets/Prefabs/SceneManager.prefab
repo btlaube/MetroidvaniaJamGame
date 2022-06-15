@@ -45,4 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenBounds: {fileID: 0}
-  playerSpawners: []
+  playerSpawner: {fileID: 11400000, guid: 3be8d6b535efd0f4eb371b11ef8d7ee0, type: 2}
+  player: {fileID: 0}

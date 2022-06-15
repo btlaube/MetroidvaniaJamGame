@@ -71,9 +71,11 @@ public class NewPlayerMovement : MonoBehaviour
         
         if (input.x > 0.1f) {
             sr.flipX = false;
+            transform.GetChild(0).localScale = new Vector2(1, 1);
         }
         else if (input.x < -0.1f) {
             sr.flipX = true;
+            transform.GetChild(0).localScale = new Vector2(-1, 1);
         }
 
         if (input.y >= 1f && jumpDuration < jumpDurationThreshold) {
@@ -207,8 +209,8 @@ public class NewPlayerMovement : MonoBehaviour
 
     public bool PlayerIsOnGround() {        
         bool groundCheck1 = Physics2D.Raycast(new Vector2(transform.position.x + widthOffset, transform.position.y - height + heightOffset), -Vector2.up, rayCastLengthCheck);
-        bool groundCheck2 = Physics2D.Raycast(new Vector2(transform.position.x + (width - 0.2f) + widthOffset, transform.position.y - height + heightOffset), -Vector2.up, rayCastLengthCheck);
-        bool groundCheck3 = Physics2D.Raycast(new Vector2( transform.position.x - (width - 0.2f), transform.position.y - height + heightOffset), -Vector2.up, rayCastLengthCheck);
+        bool groundCheck2 = Physics2D.Raycast(new Vector2(transform.position.x + (width - 0.001f) + widthOffset, transform.position.y - height + heightOffset), -Vector2.up, rayCastLengthCheck);
+        bool groundCheck3 = Physics2D.Raycast(new Vector2( transform.position.x - (width - 0.001f), transform.position.y - height + heightOffset), -Vector2.up, rayCastLengthCheck);
         
         if (groundCheck1 || groundCheck2 || groundCheck3) {
             return true;
@@ -232,8 +234,8 @@ public class NewPlayerMovement : MonoBehaviour
 
     public bool PlayerIsOnCeiling() {
         bool groundCheck1 = Physics2D.Raycast(new Vector2(transform.position.x + widthOffset, transform.position.y + height + heightOffset), Vector2.up, rayCastLengthCheck);
-        bool groundCheck2 = Physics2D.Raycast(new Vector2(transform.position.x + (width - 0.2f) + widthOffset, transform.position.y + height + heightOffset), Vector2.up, rayCastLengthCheck);
-        bool groundCheck3 = Physics2D.Raycast(new Vector2( transform.position.x - (width - 0.2f) + widthOffset, transform.position.y + height + heightOffset), Vector2.up, rayCastLengthCheck);
+        bool groundCheck2 = Physics2D.Raycast(new Vector2(transform.position.x + (width - 0.001f) + widthOffset, transform.position.y + height + heightOffset), Vector2.up, rayCastLengthCheck);
+        bool groundCheck3 = Physics2D.Raycast(new Vector2( transform.position.x - (width - 0.001f) + widthOffset, transform.position.y + height + heightOffset), Vector2.up, rayCastLengthCheck);
 
         if (groundCheck1 || groundCheck2 || groundCheck3) {
             return true;
@@ -254,12 +256,12 @@ public class NewPlayerMovement : MonoBehaviour
 
     public int GetWallDirection() {
         bool isWallLeft1 = Physics2D.Raycast(new Vector2(transform.position.x - width + widthOffset, transform.position.y + heightOffset), -Vector2.right, rayCastLengthCheck);
-        bool isWallLeft2 = Physics2D.Raycast(new Vector2(transform.position.x - width + widthOffset, transform.position.y + (height - 0.2f) + heightOffset), -Vector2.right, rayCastLengthCheck);
-        bool isWallLeft3 = Physics2D.Raycast(new Vector2(transform.position.x - width + widthOffset, transform.position.y - (height - 0.2f) + heightOffset), -Vector2.right, rayCastLengthCheck);
+        bool isWallLeft2 = Physics2D.Raycast(new Vector2(transform.position.x - width + widthOffset, transform.position.y + (height - 0.001f) + heightOffset), -Vector2.right, rayCastLengthCheck);
+        bool isWallLeft3 = Physics2D.Raycast(new Vector2(transform.position.x - width + widthOffset, transform.position.y - (height - 0.001f) + heightOffset), -Vector2.right, rayCastLengthCheck);
 
         bool isWallRight1 = Physics2D.Raycast(new Vector2(transform.position.x + width + widthOffset, transform.position.y + heightOffset), Vector2.right, rayCastLengthCheck);
-        bool isWallRight2 = Physics2D.Raycast(new Vector2(transform.position.x + width + widthOffset, transform.position.y + (height - 0.2f) + heightOffset), Vector2.right, rayCastLengthCheck);
-        bool isWallRight3 = Physics2D.Raycast(new Vector2(transform.position.x + width + widthOffset, transform.position.y - (height - 0.2f) + heightOffset), Vector2.right, rayCastLengthCheck);
+        bool isWallRight2 = Physics2D.Raycast(new Vector2(transform.position.x + width + widthOffset, transform.position.y + (height - 0.001f) + heightOffset), Vector2.right, rayCastLengthCheck);
+        bool isWallRight3 = Physics2D.Raycast(new Vector2(transform.position.x + width + widthOffset, transform.position.y - (height - 0.001f) + heightOffset), Vector2.right, rayCastLengthCheck);
 
         if (isWallLeft1 || isWallLeft2 || isWallLeft3) {
             return -1;
@@ -273,7 +275,7 @@ public class NewPlayerMovement : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D other) {
-        if(PlayerIsOnWall() || PlayerIsOnCeiling()) {
+        if(PlayerIsOnWall()) {
             rb.velocity = new Vector2(0f, 0f);
         }
     }

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3675974300469211236
+--- !u!1 &6367881856289699168
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,45 +8,45 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3675974300469211237}
-  - component: {fileID: 3675974300469211238}
-  - component: {fileID: 3675974300469211239}
+  - component: {fileID: 134042556114662977}
+  - component: {fileID: 4545422898371134204}
+  - component: {fileID: 1345680189036925560}
   m_Layer: 0
-  m_Name: Door
+  m_Name: Hazard Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3675974300469211237
+--- !u!4 &134042556114662977
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3675974300469211236}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.087383, y: -0.7932472, z: 0.0120666325}
+  m_GameObject: {fileID: 6367881856289699168}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.21875, y: -0.375, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &3675974300469211238
+--- !u!61 &4545422898371134204
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3675974300469211236}
+  m_GameObject: {fileID: 6367881856289699168}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.10716915}
+  m_Offset: {x: 1.0031395, y: 0.26392174}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -57,20 +57,18 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 2.175661}
+  m_Size: {x: 3.006279, y: 0.683094}
   m_EdgeRadius: 0
---- !u!114 &3675974300469211239
+--- !u!114 &1345680189036925560
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3675974300469211236}
+  m_GameObject: {fileID: 6367881856289699168}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a0350ce22a6b4444b0067ae78d9fa35, type: 3}
+  m_Script: {fileID: 11500000, guid: 95d799fdeb0b9c248a654ac4bbcf6fdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: 3
-  nextLocation: {x: 0, y: 0}
-  playerSpawner: {fileID: 11400000, guid: 3be8d6b535efd0f4eb371b11ef8d7ee0, type: 2}
+  damage: 5

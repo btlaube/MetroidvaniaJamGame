@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPatrol : MonoBehaviour
+public class EnemyPatrolVertical : MonoBehaviour
 {
     [Header ("Patrol Points")]
-    [SerializeField] private Transform leftEdge;
-    [SerializeField] private Transform rightEdge;
+    [SerializeField] private Transform bottomEdge;
+    [SerializeField] private Transform topEdge;
 
     [Header ("Enemy")]
     [SerializeField] private Transform enemy;
@@ -14,7 +14,7 @@ public class EnemyPatrol : MonoBehaviour
     [Header ("Movement Parameters")]
     [SerializeField] private float speed;
     private Vector2 initScale;
-    private bool movingLeft;
+    private bool movingDown;
 
     [Header ("Animator")]
     private Animator animator;
@@ -24,8 +24,8 @@ public class EnemyPatrol : MonoBehaviour
     }
 
     void Update() {
-        if(movingLeft) {
-            if(enemy.position.x >= leftEdge.position.x) {
+        if(movingDown) {
+            if(enemy.position.y >= bottomEdge.position.y) {
                 MoveInDirection(-1);
             }
             else {
@@ -33,7 +33,7 @@ public class EnemyPatrol : MonoBehaviour
             }
         }
         else {
-            if(enemy.position.x <= rightEdge.position.x) {
+            if(enemy.position.y <= topEdge.position.y) {
                 MoveInDirection(1);
             }
             else {
@@ -43,14 +43,14 @@ public class EnemyPatrol : MonoBehaviour
     }
 
     private void DirectionChange() {
-        movingLeft = !movingLeft;
+        movingDown = !movingDown;
     }
 
     private void MoveInDirection(int direction) {        
         //Make enemy face direction
-        enemy.localScale = new Vector2(Mathf.Abs(initScale.x) * direction, initScale.y);
+        enemy.localScale = new Vector2(Mathf.Abs(initScale.x) * -direction, initScale.y);
 
         //Move enemy
-        enemy.position = new Vector2(enemy.position.x + Time.deltaTime * direction * speed, enemy.position.y);
+        enemy.position = new Vector2(enemy.position.x, enemy.position.y + Time.deltaTime * direction * speed);
     }
 }

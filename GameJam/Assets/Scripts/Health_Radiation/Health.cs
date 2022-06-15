@@ -29,9 +29,15 @@ public class Health : MonoBehaviour
                 animator.SetTrigger("Die");
 
                 GetComponent<Collider2D>().enabled = false;
-                if(GetComponentInParent<EnemyPatrol>() != null) {
-                    GetComponentInParent<EnemyPatrol>().enabled = false;
-                }                
+
+                if(GetComponentInParent<EnemyPatrolHorizontal>() != null) {
+                    GetComponentInParent<EnemyPatrolHorizontal>().enabled = false;
+                }
+
+                if(GetComponentInParent<EnemyPatrolVertical>() != null) {
+                    GetComponentInParent<EnemyPatrolVertical>().enabled = false;
+                }
+
                 foreach(Behaviour comp in components) {
                     comp.enabled = false;
                 }

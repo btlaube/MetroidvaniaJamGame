@@ -5,6 +5,7 @@ public class Radiation : MonoBehaviour
     [SerializeField] private float startingRadiation;
     public float maxRadiation;
     public float currentRadiation {get; private set;}
+    public PlayerSpawner playerSpawner;
 
     private Camera myCamera;
     private AudioManager audioManager;
@@ -33,10 +34,16 @@ public class Radiation : MonoBehaviour
                 animator.SetTrigger("Die");
                 GetComponent<NewPlayerMovement>().enabled = false;
                 dead = true;
+                Die();
             }            
         }
     }
 
-    
+    void Die() {
+        transform.position = playerSpawner.runtimeSpawnLocation;
+        GetComponent<NewPlayerMovement>().enabled = true;
+        dead = false;
+        currentRadiation = startingRadiation;
+    }    
 
 }
