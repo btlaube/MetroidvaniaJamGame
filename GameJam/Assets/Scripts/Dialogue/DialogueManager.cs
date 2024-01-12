@@ -4,15 +4,15 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class DialogueManager : MonoBehaviour
-{
-    public TMP_Text nameText;
-    public TMP_Text dialogueText;
-    public Animator dialogueAnimator;
+public class DialogueManager : MonoBehaviour {
+
+    [SerializeField] private TMP_Text nameText;
+    [SerializeField] private TMP_Text dialogueText;
+    [SerializeField] private Animator dialogueAnimator;
     
     [SerializeField] private Animator AiAnimator;
-    private Queue<string> sentences;
     [SerializeField] private NewPlayerMovement playerMovement;
+    private Queue<string> sentences;    
 
     AudioManager audioManager;
 
@@ -22,7 +22,7 @@ public class DialogueManager : MonoBehaviour
     }
 
     void Update() {
-        if(SceneManager.GetActiveScene().buildIndex == 2) {
+        if(SceneManager.GetActiveScene().buildIndex == 3) {
             AiAnimator = GameObject.Find("AI").GetComponent<Animator>();
             playerMovement = GameObject.Find("Player").GetComponent<NewPlayerMovement>();
         }        

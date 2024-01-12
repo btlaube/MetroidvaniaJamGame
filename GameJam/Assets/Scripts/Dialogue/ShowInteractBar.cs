@@ -1,7 +1,7 @@
 using UnityEngine;
 
-public class ShowInteractBar : MonoBehaviour
-{
+public class ShowInteractBar : MonoBehaviour {
+    
     [SerializeField] private float interactDistance;
     private Transform target;
 

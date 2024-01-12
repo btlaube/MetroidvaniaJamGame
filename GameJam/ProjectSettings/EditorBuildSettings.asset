@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/IntroCutscene.unity
     guid: a76890503f147784f8fb2473c25b9e1b
   - enabled: 1
+    path: Assets/Scenes/WinScene.unity
+    guid: 7cad9d0b1179271438a515cbd9db6a07
+  - enabled: 1
     path: Assets/Scenes/Guardian(Start).unity
     guid: a723582dc3022324daf5c19e83a5402c
   - enabled: 1
@@ -20,4 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Phoenix_02(CentralHull).unity
     guid: 838fb484b9313f04ababec6b07379d68
+  - enabled: 1
+    path: Assets/Scenes/Phoenix_03(Core).unity
+    guid: c4f6ce934a5cd8940acf959a170cd54a
+  - enabled: 1
+    path: Assets/Scenes/Phoenix_04(East).unity
+    guid: 1b8906fd9785bfa4aa1e31e576c7d3aa
   m_configObjects: {}

@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPatrolVertical : MonoBehaviour
-{
+public class EnemyPatrolVertical : MonoBehaviour {
+    
     [Header ("Patrol Points")]
     [SerializeField] private Transform bottomEdge;
     [SerializeField] private Transform topEdge;

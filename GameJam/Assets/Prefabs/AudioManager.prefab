@@ -85,5 +85,11 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: cb61f156b365ea24980adb8f20e7deb6, type: 3}
     volume: 0.3
     pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Music
+    clip: {fileID: 8300000, guid: 25e020f8cd462b64f97c752aa02f262b, type: 3}
+    volume: 0.102
+    pitch: 1
     loop: 1
     source: {fileID: 0}

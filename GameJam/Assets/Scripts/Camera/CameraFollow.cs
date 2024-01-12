@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CameraFollow : MonoBehaviour
-{
-    public float trackingSpeed;
+public class CameraFollow : MonoBehaviour {
+    
+    [SerializeField] private float trackingSpeed;
     public float minX;
     public float minY;
     public float maxX;
@@ -27,7 +27,7 @@ public class CameraFollow : MonoBehaviour
     }
 
     void Update() {
-        if(SceneManager.GetActiveScene().buildIndex >= 2) {
+        if(SceneManager.GetActiveScene().buildIndex >= 3) {
             camTarget = GameObject.Find("Player").transform;
         }
     }

@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPatrolHorizontal : MonoBehaviour
-{
+public class EnemyPatrolHorizontal : MonoBehaviour {
+    
     [Header ("Patrol Points")]
     [SerializeField] private Transform leftEdge;
     [SerializeField] private Transform rightEdge;

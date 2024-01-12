@@ -8,10 +8,12 @@ public class PlaceReactorCore : MonoBehaviour
 
     Inventory inventory;
     AudioManager audioManager;
+    LevelLoader levelLoader;
 
-    void Awake() {
+    void Start() {
         inventory = Inventory.instance;
         audioManager = AudioManager.instance;
+        levelLoader = LevelLoader.instance;
     }
 
     void Update() {
@@ -23,6 +25,7 @@ public class PlaceReactorCore : MonoBehaviour
                 Debug.Log("You win");
                 audioManager.Play("DnaCollect");
                 spriteRenderer.sprite = withReactorCore;
+                levelLoader.LoadWinScene();
             }
             else {
                 Debug.Log("no core");

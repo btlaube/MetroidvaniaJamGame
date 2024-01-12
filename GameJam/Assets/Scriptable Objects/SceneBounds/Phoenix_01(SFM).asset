@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82486d2b53090bd4da79e50e2ee5aea0, type: 3}
-  m_Name: Phoenix_02(CentralHull)
+  m_Name: Phoenix_01(SFM)
   m_EditorClassIdentifier: 
-  minX: -100
-  minY: -100
-  maxX: 100
-  maxY: -6.8
+  minX: -4.54
+  minY: -6.65
+  maxX: 8.8
+  maxY: 100

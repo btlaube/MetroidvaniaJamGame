@@ -2,34 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bat : MonoBehaviour
-{
-    public float speed;
-    public float visionDistance;    
+public class Bat : MonoBehaviour {
 
+    [SerializeField] private float speed;
+    [SerializeField] private float visionDistance;    
     [SerializeField] private float damage;
 
     private Transform target;
+    private Collider2D targetCollider;
     private bool playerSeen;
     private Animator animator;
     private SpriteRenderer sr;
-    private float rayCastLengthCheck = 0.025f;
     private float attackCooldown;
     private float attackCooldownThreshold = 1f;
-    private float width;
-    private float height;
-    private float widthOffset;
-    private float heightOffset;
 
     void Awake() {
         target = GameObject.FindGameObjectWithTag("Player").transform;
+        targetCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>();
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
-        
-        width = GetComponent<Collider2D>().bounds.extents.x + 0.001f;
-        height = GetComponent<Collider2D>().bounds.extents.y + 0.001f;
-        widthOffset = GetComponent<Collider2D>().offset.x;
-        heightOffset = GetComponent<Collider2D>().offset.y;
     }
 
     void Update() {        
@@ -46,39 +37,12 @@ public class Bat : MonoBehaviour
                 sr.flipX = false;
             }
         }
-        if(TouchingPlayer()) {
+        if(GetComponent<Collider2D>().IsTouching(targetCollider)) {
             if(attackCooldown >= attackCooldownThreshold) {
                 target.gameObject.GetComponent<Radiation>().AddRadiation(damage);
                 attackCooldown = 0f;
             }
         }
         attackCooldown += Time.deltaTime;
-    }
-
-    bool TouchingPlayer() {
-        RaycastHit2D groundCheck1 = Physics2D.Raycast(new Vector2(transform.position.x + widthOffset, transform.position.y - height + heightOffset), -Vector2.up, rayCastLengthCheck, 1<<9);
-        RaycastHit2D groundCheck2 = Physics2D.Raycast(new Vector2(transform.position.x + (width - 0.2f) + widthOffset, transform.position.y - height + heightOffset), -Vector2.up, rayCastLengthCheck, 1<<9);
-        RaycastHit2D groundCheck3 = Physics2D.Raycast(new Vector2( transform.position.x - (width - 0.2f), transform.position.y - height + heightOffset), -Vector2.up, rayCastLengthCheck, 1<<9);
-        RaycastHit2D up1 = Physics2D.Raycast(new Vector2(transform.position.x + widthOffset, transform.position.y + height + heightOffset), Vector2.up, rayCastLengthCheck, 1<<9);
-        RaycastHit2D up2 = Physics2D.Raycast(new Vector2(transform.position.x + (width - 0.2f) + widthOffset, transform.position.y + height + heightOffset), Vector2.up, rayCastLengthCheck, 1<<9);
-        RaycastHit2D up3 = Physics2D.Raycast(new Vector2( transform.position.x - (width - 0.2f) + widthOffset, transform.position.y + height + heightOffset), Vector2.up, rayCastLengthCheck, 1<<9);
-        RaycastHit2D isWallLeft1 = Physics2D.Raycast(new Vector2(transform.position.x - width + widthOffset, transform.position.y + heightOffset), -Vector2.right, rayCastLengthCheck, 1<<9);
-        RaycastHit2D isWallLeft2 = Physics2D.Raycast(new Vector2(transform.position.x - width + widthOffset, transform.position.y + (height - 0.2f) + heightOffset), -Vector2.right, rayCastLengthCheck, 1<<9);
-        RaycastHit2D isWallLeft3 = Physics2D.Raycast(new Vector2(transform.position.x - width + widthOffset, transform.position.y - (height - 0.2f) + heightOffset), -Vector2.right, rayCastLengthCheck, 1<<9);
-        RaycastHit2D isWallRight1 = Physics2D.Raycast(new Vector2(transform.position.x + width + widthOffset, transform.position.y + heightOffset), Vector2.right, rayCastLengthCheck, 1<<9);
-        RaycastHit2D isWallRight2 = Physics2D.Raycast(new Vector2(transform.position.x + width + widthOffset, transform.position.y + (height - 0.2f) + heightOffset), Vector2.right, rayCastLengthCheck, 1<<9);
-        RaycastHit2D isWallRight3 = Physics2D.Raycast(new Vector2(transform.position.x + width + widthOffset, transform.position.y - (height - 0.2f) + heightOffset), Vector2.right, rayCastLengthCheck, 1<<9);
-
-        if(groundCheck1 || groundCheck2 || groundCheck3 || up1 || up2 || up3 || isWallLeft1 || isWallLeft2 || isWallLeft3 || isWallRight1 || isWallRight2 || isWallRight3) {
-            return true;
-        }
-        else return false;
-
-    }
-
-    void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.tag == "Player") {
-            other.transform.gameObject.GetComponent<Radiation>().AddRadiation(damage);
-        }
     }
 }

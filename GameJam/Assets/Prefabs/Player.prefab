@@ -79,7 +79,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 768752015, guid: 5ab15e66ab92e5d41908cce91f2c657c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -207,6 +207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingRadiation: 0
   maxRadiation: 5
+  currentRadiation: {fileID: 11400000, guid: c2c94c9d00e4ea84aa7411cac4108cee, type: 2}
   playerSpawner: {fileID: 11400000, guid: 3be8d6b535efd0f4eb371b11ef8d7ee0, type: 2}
 --- !u!1 &5701387119748327058
 GameObject:

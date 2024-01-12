@@ -35,8 +35,12 @@ public class LevelLoader : MonoBehaviour
         StartCoroutine(LoadLevel(1));
     }
 
-    public void LoadGameScene() {
+    public void LoadWinScene() {
         StartCoroutine(LoadLevel(2));
+    }
+
+    public void LoadGameScene() {
+        StartCoroutine(LoadLevel(3));
     }
 
     public void LoadScene(int sceneToLoad) {
@@ -58,7 +62,13 @@ public class LevelLoader : MonoBehaviour
                 canvasGroup.LoadIntroCutscene();
                 break;
             case 2:
+                canvasGroup.LoadWinScene();
+                break;
             case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
                 canvasGroup.LoadGameScene();
                 break;
         }

@@ -8,17 +8,13 @@ public class RadiationBar : MonoBehaviour
     [SerializeField] private Image totalRadiationBar;
     [SerializeField] private Image currentRadiationBar;
 
-    //void Start() {
-    //    totalRadiationBar.fillAmount = playerRadiation.maxRadiation / 10;
-    //}
-
     void Update() {
         if(SceneManager.GetActiveScene().buildIndex >= 2) {
             playerRadiation = GameObject.Find("Player").GetComponent<Radiation>();
         }
         if(playerRadiation) {
             totalRadiationBar.fillAmount = playerRadiation.maxRadiation / 10;
-            currentRadiationBar.fillAmount = playerRadiation.currentRadiation / 10;
+            currentRadiationBar.fillAmount = playerRadiation.currentRadiation.runtimeAmount / 10;
         }
         
     }

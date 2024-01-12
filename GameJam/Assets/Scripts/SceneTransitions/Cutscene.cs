@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Cutscene : MonoBehaviour
 {
     public Text textElement;
+    [TextArea(3, 10)]
     public string cutsceneText;
 
     private AudioManager audioManager;
@@ -56,6 +57,6 @@ public class Cutscene : MonoBehaviour
     void EndCutscene() {
         fullText = false;
         audioManager.Stop("Typing");
-        levelLoader.GetComponent<LevelLoader>().LoadScene(2);
+        levelLoader.GetComponent<LevelLoader>().LoadScene(3);
     }
 }
