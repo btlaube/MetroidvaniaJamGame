@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f65566b36ec5bb458120e809b258433, type: 3}
   m_Name: PlayerSpawner
   m_EditorClassIdentifier: 
-  initialSpawnLocation: {x: -16, y: -10.3}
-  runtimeSpawnLocation: {x: -16, y: -10.3}
+  initialSpawnLocation: {x: -16.2, y: -10}
+  runtimeSpawnLocation: {x: -16.2, y: -10}

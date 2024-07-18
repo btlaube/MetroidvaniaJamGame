@@ -13,10 +13,11 @@ public class SceneManagerScript : MonoBehaviour
 
     void Awake() {
         player = GameObject.Find("Player").transform;
+        camera = GameObject.Find("Main Camera").GetComponent<CameraFollow>();
     }
 
     void Start() {
-        camera = CameraFollow.instance;
+        // camera = CameraFollow.instance;
         camera.minX = screenBounds.minX;
         camera.minY = screenBounds.minY;
         camera.maxX = screenBounds.maxX;

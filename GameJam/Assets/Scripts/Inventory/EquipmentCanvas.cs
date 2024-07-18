@@ -5,11 +5,20 @@ public class EquipmentCanvas : MonoBehaviour
     public Transform equipmentParent;
 
     EquippedInventory equipment;
-    
-    void Start() {
+
+    void OnDisable()
+    {
+        equipment.onEquipmentChangedCallback -= UpdateCanvas;
+    }
+
+    void Start()
+    {
         equipment = EquippedInventory.instance;
         equipment.onEquipmentChangedCallback += UpdateCanvas;
+
+        UpdateCanvas();
     }
+
 
     void UpdateCanvas() {
         EquipmentSlot[] slots = equipmentParent.GetComponentsInChildren<EquipmentSlot>();

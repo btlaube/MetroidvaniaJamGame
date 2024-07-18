@@ -21,9 +21,9 @@ public class SFMManager : MonoBehaviour
     }
 
     void Update() {
-        if (Input.GetKeyUp(KeyCode.X)) {
-            canvasGroup.HideSFM();
-        }
+        // if (Input.GetKeyUp(KeyCode.X)) {
+        //     canvasGroup.HideSFM();
+        // }
 
         if (batDna.runtimeItemAmount >= cost) {
             buyBat.interactable = true;
@@ -52,5 +52,13 @@ public class SFMManager : MonoBehaviour
             inventory.Remove(geckoDna);
         }
         Instantiate(geckoSyringe, new Vector2(10, -9), Quaternion.identity);
+    }
+
+    public void ShowSFMCanvas() {
+        transform.GetChild(0).gameObject.SetActive(true);
+    }
+
+    public void HideSFMCanvas() {
+        transform.GetChild(0).gameObject.SetActive(false);
     }
 }

@@ -10,6 +10,7 @@ public class ItemPickup : MonoBehaviour
     void Awake() {
         spriteRenderer.sprite = item.icon;
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        
     }
 
     void OnCollisionEnter2D(Collision2D other) {        

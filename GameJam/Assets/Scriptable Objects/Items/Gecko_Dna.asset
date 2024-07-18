@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Gecko DNA
   icon: {fileID: 21300000, guid: 76d8f552e14435f459f3f9716ec95fcc, type: 3}
+  initialItemAmount: 0
+  runtimeItemAmount: 0

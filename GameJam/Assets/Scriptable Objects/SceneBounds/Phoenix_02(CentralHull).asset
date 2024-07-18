@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82486d2b53090bd4da79e50e2ee5aea0, type: 3}
   m_Name: Phoenix_02(CentralHull)
   m_EditorClassIdentifier: 
-  minX: -32.6
+  minX: -30
   minY: -100
   maxX: 14.5
   maxY: -6.8

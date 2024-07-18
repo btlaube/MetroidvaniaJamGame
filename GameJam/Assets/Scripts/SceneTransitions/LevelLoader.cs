@@ -7,7 +7,7 @@ public class LevelLoader : MonoBehaviour
 {
     public static LevelLoader instance;
     public Animator transition;
-    public CanvasGroupScript canvasGroup;
+    // public CanvasGroupScript canvasGroup;
 
     [SerializeField] private float transitionTime = 1f;
 
@@ -23,9 +23,9 @@ public class LevelLoader : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    void Start() {
-        canvasGroup = CanvasGroupScript.instance;
-    }
+    // void Start() {
+    //     canvasGroup = CanvasGroupScript.instance;
+    // }
 
     public void LoadMainMenu() {
         StartCoroutine(LoadLevel(0));
@@ -54,24 +54,6 @@ public class LevelLoader : MonoBehaviour
 
         SceneManager.LoadScene(levelIndex);
 
-        switch(levelIndex) {
-            case 0:
-                canvasGroup.LoadMainMenu();
-                break;
-            case 1:
-                canvasGroup.LoadIntroCutscene();
-                break;
-            case 2:
-                canvasGroup.LoadWinScene();
-                break;
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-            case 7:
-                canvasGroup.LoadGameScene();
-                break;
-        }
         transition.SetTrigger("End");
     }
 

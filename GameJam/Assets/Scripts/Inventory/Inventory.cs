@@ -39,6 +39,7 @@ public class Inventory : MonoBehaviour
         }
         else {
             items.Add(item);
+            item.runtimeItemAmount = 1;
         }
         
         if(onItemChangedCallback != null)

@@ -10,21 +10,21 @@ public class CameraFollow : MonoBehaviour {
     public float minY;
     public float maxX;
     public float maxY;
-    public static CameraFollow instance;
+    // public static CameraFollow instance;
 
     [SerializeField] private Transform camTarget;
 
-    void Awake() {
-        if (instance == null) {
-            instance = this;
-        }
-        else {
-            Destroy(gameObject);
-            return;
-        }
+    // void Awake() {
+    //     if (instance == null) {
+    //         instance = this;
+    //     }
+    //     else {
+    //         Destroy(gameObject);
+    //         return;
+    //     }
         
-        DontDestroyOnLoad(gameObject);
-    }
+    //     DontDestroyOnLoad(gameObject);
+    // }
 
     void Update() {
         if(SceneManager.GetActiveScene().buildIndex >= 3) {
