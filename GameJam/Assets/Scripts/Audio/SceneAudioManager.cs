@@ -5,11 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class SceneAudioManager : MonoBehaviour
 {
-    AudioManager audioManager;
-    
+    AudioHandler audioHandler;
+
+    void Awake()
+    {
+        audioHandler = GetComponent<AudioHandler>();
+    }
+
     private void Start()
     {
-        audioManager = AudioManager.instance;
         UpdateAudio();
     }
 
@@ -19,13 +23,13 @@ public class SceneAudioManager : MonoBehaviour
         Debug.Log(curScene.buildIndex);
         if (curScene.buildIndex == 0)
         {
-            audioManager.Stop("Game Music");
-            audioManager.Play("Menu Music");
+            audioHandler.Stop("Game Music");
+            audioHandler.Play("Menu Music");
         }
         else if (curScene.buildIndex == 3)
         {
-            audioManager.Stop("Menu Music");
-            audioManager.Play("Game Music");
+            audioHandler.Stop("Menu Music");
+            audioHandler.Play("Game Music");
         }
     }
 }

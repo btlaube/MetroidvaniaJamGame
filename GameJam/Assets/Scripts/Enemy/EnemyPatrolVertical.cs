@@ -39,7 +39,7 @@ public class EnemyPatrolVertical : MonoBehaviour {
             else {
                 DirectionChange();
             }
-        }        
+        }
     }
 
     private void DirectionChange() {

@@ -10,68 +10,76 @@ public class DialogueManager : MonoBehaviour {
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private Animator dialogueAnimator;
     
-    [SerializeField] private Animator AiAnimator;
     [SerializeField] private NewPlayerMovement playerMovement;
     private Queue<string> sentences;    
 
-    AudioManager audioManager;
+    private AudioHandler audioHandler;
+
+    void Awake()
+    {
+        audioHandler = GetComponent<AudioHandler>();
+    }
 
     void Start() {
         sentences = new Queue<string>();
-        audioManager = AudioManager.instance;
     }
 
-    void Update() {
-        if(SceneManager.GetActiveScene().buildIndex == 3) {
-            AiAnimator = GameObject.Find("AI").GetComponent<Animator>();
-            playerMovement = GameObject.Find("Player").GetComponent<NewPlayerMovement>();
-        }        
-        if(Input.GetKeyUp(KeyCode.Return)) {
+    void Update()
+    {
+        //TODO: Rename player movement script name if it changes
+        playerMovement = GameObject.Find("Player").GetComponent<NewPlayerMovement>();
+        if(Input.GetKeyUp(KeyCode.Return))
+        {
             DisplayNextSentence();
         }
     }
 
-    public void StartDialogue(Dialogue dialogue) {
+    public void StartDialogue(Dialogue dialogue)
+    {
         dialogueAnimator.SetTrigger("Open");
-        AiAnimator.SetBool("Talking", true);
         playerMovement.enabled = false;
 
         nameText.text = dialogue.name;
         sentences.Clear();
 
-        foreach (string sentence in dialogue.sentences) {
+        foreach (string sentence in dialogue.sentences)
+        {
             sentences.Enqueue(sentence);
         }
 
         DisplayNextSentence();
     }
 
-    public void DisplayNextSentence() {
-        if (sentences.Count == 0) {
+    public void DisplayNextSentence()
+    {
+        if (sentences.Count == 0)
+        {
             EndDialogue();
             return;
         }
-        else {
+        else
+        {
             string sentence = sentences.Dequeue();
             StopAllCoroutines();
             StartCoroutine(TypeSentence(sentence));
         }
     }
 
-    IEnumerator TypeSentence (string sentence) {
-        audioManager.Play("Typing");
+    IEnumerator TypeSentence (string sentence)
+    {
+        audioHandler.Play("Typing");
         dialogueText.text = "";
         foreach (char letter in sentence.ToCharArray())
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(0.01f);
         }
-        audioManager.Stop("Typing");
+        audioHandler.Stop("Typing");
     }
 
-    void EndDialogue() {
+    void EndDialogue()
+    {
         dialogueAnimator.SetTrigger("Close");
-        AiAnimator.SetBool("Talking", false);
         playerMovement.enabled = true;
     }
 }

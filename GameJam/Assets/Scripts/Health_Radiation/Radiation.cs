@@ -8,14 +8,14 @@ public class Radiation : MonoBehaviour
     public PlayerSpawner playerSpawner;
 
     private Camera myCamera;
-    private AudioManager audioManager;
     private Animator animator;
+    private AudioHandler audioHandler;
     private bool dead;
 
     private void Awake() {
         //currentRadiation = 0;
         animator = GetComponent<Animator>();
-        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        audioHandler = GetComponent<AudioHandler>();
         myCamera = Camera.main;
     }
 
@@ -23,14 +23,14 @@ public class Radiation : MonoBehaviour
         currentRadiation.runtimeAmount = Mathf.Clamp(currentRadiation.runtimeAmount + radiation, startingRadiation, maxRadiation);
 
         if(currentRadiation.runtimeAmount < maxRadiation) {
-            audioManager.Play("PlayerHit");
+            audioHandler.Play("PlayerHit");
             animator.SetTrigger("Hit");
             StartCoroutine(myCamera.GetComponent<CameraShake>().Shake(0.2f, 0.2f));
         }
         else {
             if(!dead) {
                 StartCoroutine(myCamera.GetComponent<CameraShake>().Shake(0.2f, 0.2f));
-                audioManager.Play("PlayerDie");
+                audioHandler.Play("PlayerDie");
                 animator.SetTrigger("Die");
                 GetComponent<NewPlayerMovement>().enabled = false;
                 dead = true;
@@ -39,7 +39,8 @@ public class Radiation : MonoBehaviour
         }
     }
 
-    void Die() {
+    void Die()
+    {
         transform.position = playerSpawner.runtimeSpawnLocation;
         GetComponent<NewPlayerMovement>().enabled = true;
         dead = false;

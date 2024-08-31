@@ -9,18 +9,20 @@ public class Cutscene : MonoBehaviour
     [TextArea(3, 10)]
     public string cutsceneText;
 
-    private AudioManager audioManager;
+    private AudioHandler audioHandler;
     private bool fullText = false;
 
     LevelLoader levelLoader;
     
-    public void OnEnable() {
-        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
-        ShowText();
+    void Awake() 
+    {
+        levelLoader = LevelLoader.instance;
+        audioHandler = GetComponent<AudioHandler>();
     }
 
-    void Awake() {
-        levelLoader = LevelLoader.instance;
+    void Start()
+    {
+        ShowText();
     }
 
     void Update() {
@@ -33,30 +35,30 @@ public class Cutscene : MonoBehaviour
             EndCutscene();
         }
         if (fullText) {
-            audioManager.Stop("Typing");
+            audioHandler.Stop("Typing");
         }
     }
 
     void ShowText() {
         StopAllCoroutines();
-        audioManager.Stop("Typing");
+        audioHandler.Stop("Typing");
         StartCoroutine(TypeDialogue(cutsceneText));
     }
 
     IEnumerator TypeDialogue(string text) {
-        audioManager.Play("Typing");
+        audioHandler.Play("Typing");
         textElement.text = "";
         foreach (char letter in text.ToCharArray()) {
             textElement.text += letter;
             yield return new WaitForSeconds(0.01f);
         }
         fullText = true;
-        audioManager.Stop("Typing");
+        audioHandler.Stop("Typing");
     }
 
     void EndCutscene() {
         fullText = false;
-        audioManager.Stop("Typing");
+        audioHandler.Stop("Typing");
         levelLoader.GetComponent<LevelLoader>().LoadScene(3);
     }
 }

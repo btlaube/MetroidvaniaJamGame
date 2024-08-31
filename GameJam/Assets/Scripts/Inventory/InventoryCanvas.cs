@@ -2,11 +2,7 @@ using UnityEngine;
 
 public class InventoryCanvas : MonoBehaviour
 {
-    // public Transform itemsParent;
-    // public GameObject inventoryUI;
-
     Inventory inventory;
-    AudioManager audioManager;
 
     void OnDisable()
     {
@@ -16,19 +12,10 @@ public class InventoryCanvas : MonoBehaviour
     void Start()
     {
         inventory = Inventory.instance;
-        audioManager = AudioManager.instance;
         inventory.onItemChangedCallback += UpdateCanvas;
 
         UpdateCanvas();
     }
-
-    // void Update() {
-    //     if(Input.GetKeyUp(KeyCode.P)) {
-    //         audioManager.Play("DnaCollect");
-    //         inventoryUI.SetActive(!inventoryUI.activeSelf);
-    //         UpdateCanvas();
-    //     }
-    // }
 
     void UpdateCanvas() {
         InventorySlot[] slots = transform.GetComponentsInChildren<InventorySlot>();

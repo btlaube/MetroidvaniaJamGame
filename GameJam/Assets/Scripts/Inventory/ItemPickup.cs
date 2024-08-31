@@ -2,29 +2,30 @@ using UnityEngine;
 
 public class ItemPickup : MonoBehaviour
 {
-    public Item item;
+    [SerializeField] private Item item;
 
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    private AudioManager audioManager;
+    private SpriteRenderer sr;
+    private Inventory inventory;
 
-    void Awake() {
-        spriteRenderer.sprite = item.icon;
-        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
-        
+    void Awake()
+    {
+        inventory = Inventory.instance;
+        sr = GetComponent<SpriteRenderer>();
     }
 
-    void OnCollisionEnter2D(Collision2D other) {        
-        if(other.gameObject.tag == "Player") {
-            PickUp();
-        }
+    void OnEnable()
+    {
+        sr.sprite = item.icon;
     }
 
-    void PickUp() {
-        bool wasPickedUp = Inventory.instance.Add(item);
-        
-        if(wasPickedUp) {
-            audioManager.Play("DnaCollect");
-            Destroy(gameObject);
-        }
+    public void SetItem(Item newItem)
+    {
+        this.item = newItem;
+    }
+
+    public void PickUp()
+    {
+        inventory.Add(item);
+        Destroy(gameObject);
     }
 }

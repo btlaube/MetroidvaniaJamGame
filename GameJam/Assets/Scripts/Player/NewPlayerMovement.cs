@@ -28,13 +28,14 @@ public class NewPlayerMovement : MonoBehaviour
     [SerializeField] private bool gecko;
     [SerializeField] private bool magnet;
 
-    AudioManager audioManager;
+    private AudioHandler audioHandler;
     EquippedInventory equippedInventory;
 
     void Awake() {
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        audioHandler = GetComponent<AudioHandler>();
 
         width = GetComponent<Collider2D>().bounds.extents.x + 0.001f;
         height = GetComponent<Collider2D>().bounds.extents.y + 0.001f;
@@ -42,8 +43,8 @@ public class NewPlayerMovement : MonoBehaviour
         heightOffset = GetComponent<Collider2D>().offset.y;        
     }
 
-    void Start() {
-        audioManager = AudioManager.instance;
+    void Start()
+    {
         equippedInventory = EquippedInventory.instance;
     }
 
@@ -152,15 +153,15 @@ public class NewPlayerMovement : MonoBehaviour
         var yVelocity = 0f;
         if (PlayerIsOnGround() && input.y > 0) {
             yVelocity = jump;
-            audioManager.Play("Jump");
+            audioHandler.Play("Jump");
         }
         else if(PlayerIsOnWall() && input.y > 0 && gecko) {
             yVelocity = jump;
-            audioManager.Play("Jump");
+            audioHandler.Play("Jump");
         }
         else if(PlayerIsOnCeiling() && input.y > 0) {
             yVelocity = -jump;
-            audioManager.Play("Jump");
+            audioHandler.Play("Jump");
         }
         else {
             yVelocity = rb.velocity.y;

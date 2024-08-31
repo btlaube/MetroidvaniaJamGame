@@ -175,6 +175,7 @@ GameObject:
   - component: {fileID: 3584801297420816151}
   - component: {fileID: 4626510456541115941}
   - component: {fileID: 4079527449244867754}
+  - component: {fileID: 8590392635482695148}
   - component: {fileID: 3077707532524326812}
   m_Layer: 0
   m_Name: Cutscene Canvas
@@ -266,6 +267,25 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &8590392635482695148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8538337474573128056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75971f69dbdd7884796c33fc443d3e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Typing
+    clip: {fileID: 8300000, guid: cb61f156b365ea24980adb8f20e7deb6, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
 --- !u!114 &3077707532524326812
 MonoBehaviour:
   m_ObjectHideFlags: 0

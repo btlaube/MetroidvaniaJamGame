@@ -19,7 +19,8 @@ public class EnemyPatrolHorizontal : MonoBehaviour {
     [Header ("Animator")]
     private Animator animator;
 
-    void Awake() {
+    void Awake()
+    {
         initScale = enemy.localScale;
     }
 

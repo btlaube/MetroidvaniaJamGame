@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 4041430628352995945}
   - component: {fileID: 4041430628352995941}
   - component: {fileID: 6335020555097547423}
+  - component: {fileID: 5582768902513737963}
+  - component: {fileID: 2049356974354636557}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -128,10 +130,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trackingSpeed: 5
-  minX: -100
+  minX: -1
   minY: -100
   maxX: 100
-  maxY: 100
+  maxY: 1
   camTarget: {fileID: 0}
 --- !u!114 &6335020555097547423
 MonoBehaviour:
@@ -143,5 +145,42 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ec7ea8fd7412954ebea368ed86b0bac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5582768902513737963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4041430628352995944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75971f69dbdd7884796c33fc443d3e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Game Music
+    clip: {fileID: 8300000, guid: d1e4a96732cc4934ea44633c29a7def5, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Menu Music
+    clip: {fileID: 8300000, guid: ebb5b10b66940224a89114da920e9665, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+--- !u!114 &2049356974354636557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4041430628352995944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ebf1e18459e2d740a68c8ede5f5ca7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

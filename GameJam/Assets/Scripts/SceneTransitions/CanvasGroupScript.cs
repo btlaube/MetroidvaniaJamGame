@@ -6,8 +6,6 @@ public class CanvasGroupScript : MonoBehaviour
 {
     public static CanvasGroupScript instance;
 
-    private AudioManager audioManager;
-
     void Awake() {
         if (instance == null) {
             instance = this;
@@ -18,21 +16,7 @@ public class CanvasGroupScript : MonoBehaviour
         }
     
         DontDestroyOnLoad(gameObject);
-
-        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
-
-    //void Update() {
-    //    if(Input.GetKeyUp(KeyCode.P)) {
-    //        audioManager.Play("DnaCollect");
-    //        if(inventoryOpen) {
-    //            HideInventory();
-    //        }
-    //        else {
-    //            ShowInventory();
-    //        }
-    //    }
-    //}
 
     public void LoadMainMenu() {
         foreach(Transform canvas in transform) {
@@ -75,14 +59,4 @@ public class CanvasGroupScript : MonoBehaviour
     public void HideSFM() {
         transform.GetChild(6).gameObject.SetActive(false);
     }
-
-    //public void ShowInventory() {
-    //    inventoryOpen = true;
-    //    transform.GetChild(3).gameObject.SetActive(true);
-    //}
-//
-    //public void HideInventory() {
-    //    inventoryOpen = false;
-    //    transform.GetChild(3).gameObject.SetActive(false);
-    //}
 }

@@ -2,16 +2,16 @@ using UnityEngine;
 
 public class Collectible : MonoBehaviour
 {
-    private AudioManager audioManager;
+    private AudioHandler audioHandler;
 
     void Awake() {
-        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        audioHandler = GetComponent<AudioHandler>();
     }
 
     void OnCollisionEnter2D(Collision2D other) {        
         if(other.gameObject.tag == "Player") {
             PickUp();
-            audioManager.Play("DnaCollect");
+            audioHandler.Play("DnaCollect");
             Destroy(gameObject);
         }
     }

@@ -5,13 +5,21 @@ using UnityEngine.Events;
 
 public class ColliderEventTrigger : MonoBehaviour
 {
-    public UnityEvent triggerEvent;
+    public UnityEvent myEvent;
 
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
-            triggerEvent.Invoke();
+            // StartCoroutine(Fart());
+            myEvent.Invoke();
+            Destroy(gameObject);
         }
     }
+
+    public void SelfDestruct()
+    {
+        Destroy(gameObject);
+    }
+
 }
